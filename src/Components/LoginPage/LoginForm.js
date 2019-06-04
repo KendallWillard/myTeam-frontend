@@ -2,6 +2,7 @@ import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import { Redirect } from 'react-router-dom'
 import './LoginForm.css'
+import { responsiveFontSizes } from "@material-ui/core/styles";
 
 export default class FormPage extends React.Component {
   state = {
@@ -17,9 +18,47 @@ export default class FormPage extends React.Component {
     })
   }
 
+
+
+  fetchUserInfo = (event) => {
+    fetch('http://localhost:3001/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        user: {
+         username: this.state.username,
+         password: this.state.password,
+        }
+      })
+    })
+    .then(response => response.json())
+    .then(this.handleLogin)  
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
-    this.logUserIn();
+    fetch('http://localhost:3001/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+     user: {
+      username: this.state.username,
+      password: this.state.password,
+      first_name: 'kendall',
+      last_name: 'willard',
+      phone: '4172945180'
+    }
+  })
+    })
+  .then(result => result.json())
+  .then(response => window.localStorage.setItem(this.state.username, response.jwt))
+
   }
 
   redirectToHome = (event) => {
@@ -65,6 +104,7 @@ export default class FormPage extends React.Component {
               </div>
               <div className="text-center">
                 <MDBBtn onClick={this.handleSubmit}>Login</MDBBtn>
+                <MDBBtn onClick={this.fetchUserInfo}>Get User Info</MDBBtn>
               </div>
             </form>
           </MDBCol>

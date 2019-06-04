@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import TextFieldMargins from './TeamInput'
+import TextFieldMargins from './Components/Team/TeamInput'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import FormPage from './LoginForm'
+import FormPage from './Components/LoginPage/LoginForm'
 
 class App extends Component {
   render() {
