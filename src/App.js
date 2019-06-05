@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import TextFieldMargins from './Components/Team/TeamInput'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import FormPage from './Components/LoginPage/LoginForm'
+import LoginPage from './Components/LoginPage/LoginForm'
+import SignUpPage from './Components/SignUpPage/SignUpPage'
 
 class App extends Component {
+
+  state = {
+    userId: 0,
+    username: ''
+  }
+
   render() {
     return (
         <Router >
@@ -13,7 +19,10 @@ class App extends Component {
             return <TextFieldMargins />
           }} />
           <Route exact path='/login' render={() => {
-            return <FormPage />
+            return <LoginPage />
+          }} />
+          <Route exact path='/signup' render={() => {
+            return <SignUpPage />
           }} />
         </Router>
     );

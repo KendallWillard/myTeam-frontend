@@ -1,14 +1,28 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import {
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBModalFooter,
+  MDBIcon,
+  MDBCardHeader,
+  MDBBtn,
+  MDBInput
+} from "mdbreact";
 import { Redirect } from 'react-router-dom'
 import './LoginForm.css'
-import { responsiveFontSizes } from "@material-ui/core/styles";
+// import { responsiveFontSizes } from "@material-ui/core/styles";
 
 export default class FormPage extends React.Component {
   state = {
     username: '',
     password: '',
-    loggedIn: false
+    jwtToken: '',
+    loggedIn: false,
+    incorrectPassword: false,
+    signUpPage: false
   }
 
   handleChange = (event) => {
@@ -18,9 +32,13 @@ export default class FormPage extends React.Component {
     })
   }
 
+  handleLogin = (user) => {
+    user.message === 'Invalid username or password' ? this.setState({loggedIn: false, incorrectPassword: true}) : this.setState({loggedIn: true}) 
+  }
 
 
   fetchUserInfo = (event) => {
+    event.preventDefault();
     fetch('http://localhost:3001/login', {
       method: 'POST',
       headers: {
@@ -35,7 +53,8 @@ export default class FormPage extends React.Component {
       })
     })
     .then(response => response.json())
-    .then(this.handleLogin)  
+    .then(this.handleLogin)
+    .catch(console.error)
   }
 
   handleSubmit = (event) => {
@@ -49,67 +68,92 @@ export default class FormPage extends React.Component {
       body: JSON.stringify({
      user: {
       username: this.state.username,
-      password: this.state.password,
-      first_name: 'kendall',
-      last_name: 'willard',
-      phone: '4172945180'
+      password: this.state.password
     }
   })
     })
   .then(result => result.json())
   .then(response => window.localStorage.setItem(this.state.username, response.jwt))
-
+  .catch(console.error)
   }
 
   redirectToHome = (event) => {
-    this.setState({
-      loggedIn: true
-    })
+    this.setState({loggedIn: true})
+  }
+
+  redirectToSignUpPage = () => {
+    this.setState({signUpPage: true})
   }
 
 
   render() {
-    if(this.state.redirectToHome) {
+    if(this.state.loggedIn) {
       return <Redirect to='/home' />
     }
+    if(this.state.signUpPage) {
+      return <Redirect to='/signup' />
+    }
     return (
-      <MDBContainer id="form-container">
-        <MDBRow>
-          <MDBCol md="12">
-            <form>
-              <p className="h5 text-center mb-4">Sign in</p>
-              <div className="grey-text">
-                <MDBInput
-                  label="Type your username"
-                  icon="envelope"
-                  group
-                  type="ninja-user"
-                  validate
-                  error="wrong"
-                  success="right"
-                  name="username"
-                  onChange={this.handleChange}
-                  value={this.state.username}
-                />
-                <MDBInput
-                  label="Type your password"
-                  icon="lock"
-                  group
-                  type="password"
-                  validate
-                  onChange={this.handleChange}
-                  name="password"
-                  value={this.state.password}
-                />
+      <MDBContainer>
+      <MDBRow>
+        <MDBCol md="6">
+          <MDBCard>
+            <MDBCardBody>
+              <MDBCardHeader className="form-header deep-blue-gradient rounded">
+                <h3 className="my-3">
+                  <MDBIcon icon="lock" /> Login:
+                </h3>
+              </MDBCardHeader>
+              <form>
+                <div className="grey-text">
+                  <MDBInput
+                    label="Username..."
+                    icon="user-ninja"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="username"
+                    onChange={this.handleChange}
+                    value={this.state.username}
+                  />
+                  <MDBInput
+                    label="Password..."
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    onChange={this.handleChange}
+                    name="password"
+                    value={this.state.password}
+                  />
+                </div>
+
+              <div className="text-center mt-4">
+                <MDBBtn
+                  color="light-blue"
+                  className="mb-3"
+                  type="submit"
+                  onClick={this.fetchUserInfo}
+                >
+                  Login
+                </MDBBtn>
               </div>
-              <div className="text-center">
-                <MDBBtn onClick={this.handleSubmit}>Login</MDBBtn>
-                <MDBBtn onClick={this.fetchUserInfo}>Get User Info</MDBBtn>
-              </div>
-            </form>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+              </form>
+              <MDBModalFooter>
+                <div className="font-weight-light">
+                  <p id="sign-up" onClick={this.redirectToSignUpPage}>Not a member? Sign Up</p>
+                  <p id="sign-up">Forgot Password?</p>
+                </div>
+              </MDBModalFooter>
+            </MDBCardBody>
+          </MDBCard>
+        </MDBCol>
+      </MDBRow>
+      {this.state.incorrectPassword ? <h1>Error! Incorrect Username or Password</h1> : null}
+
+    </MDBContainer>
     );
   };
 };
