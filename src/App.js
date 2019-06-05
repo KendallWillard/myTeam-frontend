@@ -1,16 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
-import TextFieldMargins from './Components/Team/TeamInput'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import LoginPage from './Components/LoginPage/LoginForm'
-import SignUpPage from './Components/SignUpPage/SignUpPage'
+import TextFieldMargins from './Containers/Team/TeamInput';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import LoginPage from './Containers/LoginPage/LoginForm';
+import SignUpPage from './Components/SignUpPage/SignUpPage';
 
 class App extends Component {
-
-  state = {
-    userId: 0,
-    username: ''
-  }
 
   render() {
     return (

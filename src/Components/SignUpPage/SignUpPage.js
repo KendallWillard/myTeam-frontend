@@ -1,7 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import { Redirect } from 'react-router-dom'
-import '../LoginPage/LoginForm.css'
+import '../../Containers/LoginPage/LoginForm.css'
 // import { responsiveFontSizes } from "@material-ui/core/styles";
 
 export default class SignUpPage extends React.Component {

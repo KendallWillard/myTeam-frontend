@@ -13,9 +13,11 @@ import {
 } from "mdbreact";
 import { Redirect } from 'react-router-dom'
 import './LoginForm.css'
+import { connect } from 'react-redux';
+import { setUserInfo } from '../../Actions/setUserInfo';
 // import { responsiveFontSizes } from "@material-ui/core/styles";
 
-export default class FormPage extends React.Component {
+class FormPage extends React.Component {
   state = {
     username: '',
     password: '',
@@ -32,8 +34,16 @@ export default class FormPage extends React.Component {
     })
   }
 
-  handleLogin = (user) => {
-    user.message === 'Invalid username or password' ? this.setState({loggedIn: false, incorrectPassword: true}) : this.setState({loggedIn: true}) 
+  handleLogin = ( {message, user, jwt} ) => {
+    this.props.setUserInfo(user.id, jwt);
+    if( message === 'Invalid username or password' ) 
+    {
+      this.setState({loggedIn: false, incorrectPassword: true});
+
+    }
+    else {
+      this.setState({loggedIn: true});
+    }
   }
 
 
@@ -57,25 +67,6 @@ export default class FormPage extends React.Component {
     .catch(console.error)
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
-    fetch('http://localhost:3001/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({
-     user: {
-      username: this.state.username,
-      password: this.state.password
-    }
-  })
-    })
-  .then(result => result.json())
-  .then(response => window.localStorage.setItem(this.state.username, response.jwt))
-  .catch(console.error)
-  }
 
   redirectToHome = (event) => {
     this.setState({loggedIn: true})
@@ -84,7 +75,6 @@ export default class FormPage extends React.Component {
   redirectToSignUpPage = () => {
     this.setState({signUpPage: true})
   }
-
 
   render() {
     if(this.state.loggedIn) {
@@ -157,3 +147,9 @@ export default class FormPage extends React.Component {
     );
   };
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  setUserInfo: (id, jwtToken) => dispatch(setUserInfo(id, jwtToken))
+})
+
+export default connect( null, mapDispatchToProps)(FormPage)

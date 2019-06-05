@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 // import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
@@ -11,11 +12,13 @@ const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       BASE_HOSTING_URL = `http://localhost:3001`
 
 
-export default class TextFieldMargins extends React.Component {
-  state = {
-    teamName: '',
-    teamNews: [],
-    team: ''
+class TeamInput extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      teamName: '',
+      teamNews: []
+    }
   }
 
   handleChange = (event) => {
@@ -29,22 +32,23 @@ export default class TextFieldMargins extends React.Component {
     fetch(`${FIRST_HALF_NEWS_URL}${this.state.teamName}${SECOND_HALF_NEWS_URL}`)
     .then(response => response.json())
     .then(teamNews => this.setState({teamNews}) )
-    .catch(error => console.error(error));
+    .catch(console.error);
   }
 
-  postNewTeamWithUser = () => {
+  postNewTeamWithUser = (teamName) => {
+    const { id, jwtToken } = this.props;
     const team = {
-      name: this.state.team,
-      city: this.state.team,
-      description: this.state.team,
-      user_id: 4
+      name: teamName,
+      city: teamName,
+      description: teamName,
+      user_id: id
     }
-    fetch(`${BASE_HOSTING_URL}/users/4/teams`, {
+    fetch(`${BASE_HOSTING_URL}/users/${id}/teams`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Accept: 'application/json',
-        Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0fQ.b4EGRtU5Ti8H2sEtmjprj5SE1O2-ZF64S1AauH2m8fA`
+        Authorization: `Bearer ${jwtToken}`
       },
       body: JSON.stringify({team})
     })
@@ -54,7 +58,6 @@ export default class TextFieldMargins extends React.Component {
   handleClick = (event) => {
     event.preventDefault();
     this.fetchAndParseNewsArticles();
-
   }
 
   parseNewsArticles = () => {
@@ -64,17 +67,13 @@ export default class TextFieldMargins extends React.Component {
   } 
 
   handleSelection = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    })
-    this.postNewTeamWithUser();
+    this.postNewTeamWithUser(event.target.value)
   }
+
 
   render() {
     return (
       <div>
-
       <Container text>
         <TextField
           label="None"
@@ -204,7 +203,6 @@ export default class TextFieldMargins extends React.Component {
                 <MDBDropdownItem value="Chicago Bulls"  onClick={this.handleSelection} name="team" >Chicago Bulls</MDBDropdownItem>
                 <MDBDropdownItem value="Cleveland Cavaliers"  onClick={this.handleSelection} name="team" >Cleveland Cavaliers</MDBDropdownItem>
                 <MDBDropdownItem value="New York Knicks"  onClick={this.handleSelection} name="team" >New York Knicks</MDBDropdownItem>
-
               </MDBDropdownMenu>
             </MDBDropdown>
             <MDBDropdown dropright>
@@ -351,3 +349,11 @@ export default class TextFieldMargins extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => (
+  {
+  id: state.user.id,
+  jwtToken: state.user.jwtToken
+})
+
+export default connect( mapStateToProps, null)(TeamInput)
