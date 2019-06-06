@@ -42,6 +42,8 @@ class FormPage extends React.Component {
 
     }
     else {
+      window.localStorage.setItem( 'userID', user.id )
+      window.localStorage.setItem( 'jwtToken', jwt ) 
       this.setState({loggedIn: true});
     }
   }
