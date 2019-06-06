@@ -46,7 +46,6 @@ class FormPage extends React.Component {
     }
   }
 
-
   fetchUserInfo = (event) => {
     event.preventDefault();
     fetch('http://localhost:3001/login', {

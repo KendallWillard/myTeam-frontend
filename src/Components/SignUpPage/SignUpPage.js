@@ -6,9 +6,12 @@ import '../../Containers/LoginPage/LoginForm.css'
 
 export default class SignUpPage extends React.Component {
   state = {
+    firstName: '',
+    lastName: '',
     username: '',
     password: '',
-    loggedIn: false
+    phone: '',
+    signedUp: false
   }
 
   handleChange = (event) => {
@@ -30,27 +33,26 @@ export default class SignUpPage extends React.Component {
      user: {
       username: this.state.username,
       password: this.state.password,
-      first_name: 'kendall',
-      last_name: 'willard',
-      phone: '4172945180'
+      first_name: this.state.firstName,
+      last_name: this.state.lastName,
+      phone: this.state.phone
     }
   })
     })
   .then(result => result.json())
   .then(response => window.localStorage.setItem(this.state.username, response.jwt))
+  .then(this.redirectToLogin)
   .catch(console.error)
   }
 
-  redirectToHome = (event) => {
-    this.setState({
-      loggedIn: true
-    })
+  redirectToLogin = () => {
+    this.setState({signedUp: true})
   }
 
 
   render() {
-    if(this.state.loggedIn) {
-      return <Redirect to='/home' />
+    if(this.state.signedUp) {
+      return <Redirect to='/login' />
     }
     return (
       <MDBContainer id="form-container">
@@ -60,7 +62,43 @@ export default class SignUpPage extends React.Component {
               <p className="h5 text-center mb-4">Sign Up</p>
               <div className="grey-text">
                 <MDBInput
-                  label="Type your username"
+                  label="First Name..."
+                  icon="user-ninja"
+                  group
+                  type="text"
+                  validate
+                  error="wrong"
+                  success="right"
+                  name="firstName"
+                  onChange={this.handleChange}
+                  value={this.state.firstName}
+                />
+                <MDBInput
+                  label="Last Name..."
+                  icon="user-ninja"
+                  group
+                  type="text"
+                  validate
+                  error="wrong"
+                  success="right"
+                  name="lastName"
+                  onChange={this.handleChange}
+                  value={this.state.lastName}
+                />
+                <MDBInput
+                  label="Phone..."
+                  icon="mobile"
+                  group
+                  type="text"
+                  validate
+                  error="wrong"
+                  success="right"
+                  name="phone"
+                  onChange={this.handleChange}
+                  value={this.state.phone}
+                />
+                <MDBInput
+                  label="Username..."
                   icon="user-ninja"
                   group
                   type="text"
@@ -72,7 +110,7 @@ export default class SignUpPage extends React.Component {
                   value={this.state.username}
                 />
                 <MDBInput
-                  label="Type your password"
+                  label="Password..."
                   icon="lock"
                   group
                   type="password"

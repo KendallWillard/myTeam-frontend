@@ -67,7 +67,9 @@ class TeamInput extends React.Component {
   } 
 
   handleSelection = (event) => {
-    this.postNewTeamWithUser(event.target.value)
+    const { value } = event.target
+    this.setState({teamName: value})
+    this.postNewTeamWithUser(value)
   }
 
 
