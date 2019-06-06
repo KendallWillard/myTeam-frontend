@@ -8,6 +8,7 @@ import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from
 import { Redirect } from 'react-router-dom';
 
 import apiConfig from '../../../apiKeys'
+import DisplayTeamArticles from './DisplayTeamArticles';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
       BASE_HOSTING_URL = `http://localhost:3001`
@@ -35,8 +36,6 @@ class TeamInput extends React.Component {
         Authorization: `Bearer ${jwtToken}`
       }
     })
-    .then(response => response.json())
-    .then(console.log)
     .catch(console.error)
   }
 
@@ -78,23 +77,6 @@ class TeamInput extends React.Component {
     event.preventDefault();
     this.fetchAndParseNewsArticles();
   }
-
-  parseNewsArticles = () => {
-    const parsedArticles = this.state.teamNews.articles.filter(article =>  {
-      if( article.description ) { 
-// For some reason some of the articles description are not attributes so this code will break
-// if there is not a check for article.description
-        return(
-          article.description.includes(this.state.teamName) || 
-          article.title.includes(this.state.teamName) ||
-          article.content.includes(this.state.teamName)
-       )
-      }
-    })
-    const teamOnlyArticles = parsedArticles.map((article, ndx) => <Card header={article.title} description={article.description} fluid color='red' key={Date.now() + ndx} />);
-    this.setState({teamOnlyArticles});
-  } 
-  
 
   handleTeamSelection = (event) => {
     const { value } = event.target
@@ -397,7 +379,7 @@ class TeamInput extends React.Component {
         </MDBDropdown>
       </MDBDropdownMenu>
     </MDBDropdown>
-              {this.state.teamOnlyArticles}
+    <DisplayTeamArticles teamArticles={this.state.teamNews} teamName={this.state.teamName} />
         </div>
     );
   }
