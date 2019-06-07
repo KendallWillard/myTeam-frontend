@@ -40,7 +40,6 @@ export default class SignUpPage extends React.Component {
   })
     })
   .then(result => result.json())
-  .then(response => window.localStorage.setItem(this.state.username, response.jwt))
   .then(this.redirectToLogin)
   .catch(console.error)
   }

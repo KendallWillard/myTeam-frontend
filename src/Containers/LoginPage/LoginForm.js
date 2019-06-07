@@ -33,7 +33,7 @@ class FormPage extends React.Component {
       [name]: value
     })
   }
-
+  
   handleLogin = ( {message, user, jwt} ) => {
     this.props.setUserInfo(user.id, jwt);
     if( message === 'Invalid username or password' ) 
@@ -64,6 +64,7 @@ class FormPage extends React.Component {
       })
     })
     .then(response => response.json())
+    
     .then(this.handleLogin)
     .catch(console.error)
   }

@@ -23,12 +23,13 @@ class TeamInput extends React.Component {
       userId: 0,
       jwtToken: '',
       redirectToLogin: false,
-      teamOnlyArticles: []
+      teamOnlyArticles: [],
+      userTeams: []
     }
   }
    
   componentDidMount() {
-    const userId = parseInt(window.localStorage.getItem('userID') ),
+    const userId = parseInt( window.localStorage.getItem('userID') ),
           jwtToken = window.localStorage.getItem('jwtToken')
     this.setState({userId, jwtToken})
     fetch(`${BASE_HOSTING_URL}/users/${userId}/teams`, {
@@ -36,6 +37,8 @@ class TeamInput extends React.Component {
         Authorization: `Bearer ${jwtToken}`
       }
     })
+    .then(response => response.json())
+    .then(userTeams => this.setState({userTeams}))
     .catch(console.error)
   }
 
