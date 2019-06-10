@@ -1,12 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { Card, Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Redirect } from 'react-router-dom';
-
+import UserFavoriteTeams from './UserFavoriteTeams';
 import apiConfig from '../../../apiKeys'
 import DisplayTeamArticles from './DisplayTeamArticles';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
@@ -22,12 +20,14 @@ class TeamInput extends React.Component {
       teamNews: [],
       userId: 0,
       jwtToken: '',
-      redirectToLogin: false,
       teamOnlyArticles: [],
-      userTeams: []
+      userTeams: [],
+      displaysNews: false,
+      redirectToLogin: false,
+      currentTeam: ''
     }
   }
-   
+  
   componentDidMount() {
     const userId = parseInt( window.localStorage.getItem('userID') ),
           jwtToken = window.localStorage.getItem('jwtToken')
@@ -39,7 +39,17 @@ class TeamInput extends React.Component {
     })
     .then(response => response.json())
     .then(userTeams => this.setState({userTeams}))
+    .then(this.getDefaultUserTeam)
+    .then(this.fetchAndParseNewsArticles)
     .catch(console.error)
+  }
+
+  mountNewsComponent = () => {
+    this.setState({displaysNews: true})
+  }
+
+  getDefaultUserTeam = () => {
+    this.setState({teamName: this.state.userTeams[0].name})
   }
 
   handleChange = (event) => {
@@ -98,42 +108,19 @@ class TeamInput extends React.Component {
     this.setState({redirectToLogin: true})
   }
 
-
   render() {
     if(this.state.redirectToLogin) {
       return <Redirect to='/login' />
     }
     return (
-      <div>
+      <div className="teamInput">      
       <Container text>
-        <TextField
-          label="None"
-          id="margin-none"
-          helperText="Some important text"
-          name="teamName"
-          value={this.state.teamName}
-          onChange={this.handleChange}
-        />
-        <Button 
-          variant="contained" 
-          color="primary"
-          onClick={this.handleClick}
-        >
-          Add A Team
-        </Button>
-        <Button 
-          variant="contained"
-          onClick={this.parseNewsArticles}
-        >
-          Parse News Info
-        </Button>
         <Button 
           variant="contained"
           onClick={this.logout}
         >
           Logout
         </Button>
-
         </Container>
         <MDBDropdown>
       <MDBDropdownToggle caret color="primary">
@@ -382,7 +369,13 @@ class TeamInput extends React.Component {
         </MDBDropdown>
       </MDBDropdownMenu>
     </MDBDropdown>
-    <DisplayTeamArticles teamArticles={this.state.teamNews} teamName={this.state.teamName} />
+    { this.state.teamNews.articles &&
+      <UserFavoriteTeams userTeams={this.state.userTeams} />
+    }
+    { this.state.teamNews.articles &&
+        <DisplayTeamArticles teamArticles={this.state.teamNews.articles} teamName={this.state.teamName} />
+      } 
+
         </div>
     );
   }
