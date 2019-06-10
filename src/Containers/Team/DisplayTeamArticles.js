@@ -52,7 +52,6 @@ export default class DisplayTeamArticles extends Component {
   }
 
   reMountComponent = () => {
-    console.log('fired inside remount')
     let parsedArticles = this.parseAllTheArticles();
     // let newparsedArticles = this.transposeDuplicates(parsedArticles)
     this.convertDateToUserFriendly(parsedArticles)

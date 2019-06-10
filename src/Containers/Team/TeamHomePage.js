@@ -1,18 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import { Container } from 'semantic-ui-react';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Redirect } from 'react-router-dom';
-import UserFavoriteTeams from './UserFavoriteTeams';
-import apiConfig from '../../../apiKeys'
+import { ListGroup, Jumbotron, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import apiConfig from '../../../apiKeys';
 import DisplayTeamArticles from './DisplayTeamArticles';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
-      BASE_HOSTING_URL = `http://localhost:3001`
+      BASE_HOSTING_URL = `http://localhost:3001`;
 
 
-class TeamInput extends React.Component {
+class TeamHomePage extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -63,7 +61,6 @@ class TeamInput extends React.Component {
   }
 
   fetchAndSetNewsArticles = () => {
-    console.log(this.state.teamName)
     fetch(`${FIRST_HALF_NEWS_URL}${this.state.teamName}${SECOND_HALF_NEWS_URL}`)
     .then(response => response.json())
     .then(teamNews => this.setState({teamNews}) )
@@ -118,17 +115,27 @@ class TeamInput extends React.Component {
     }
     return (
       <div className="teamInput">      
-      <Container text>
+      <Jumbotron>
+        <h1>My Teams</h1>
+        <h3>
+          Get the news only for your favorite teams. Don't like that other teams quarterback? Tired
+          of always seeing how 'good' the other team is doing. Well, now you don't have to with My Teams!
+          Only your favorite Teams!
+        </h3>
+        <p>
+          <Button variant="primary">Learn more</Button>
+        </p>
+      </Jumbotron>
+      <Container>
         <Button 
-          variant="contained"
+          variant="danger"
           onClick={this.logout}
         >
           Logout
         </Button>
-        </Container>
         <MDBDropdown>
       <MDBDropdownToggle caret color="primary">
-        Select Favorite Team
+        Add a Favorite Team
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>
       <MDBDropdown dropright>
@@ -381,7 +388,7 @@ class TeamInput extends React.Component {
         changeCurrentTeam={this.changeCurrentTeam}
         />
       } 
-
+      </Container>
         </div>
     );
   }
@@ -393,4 +400,4 @@ const mapStateToProps = state => (
   jwtToken: state.user.jwtToken
 })
 
-export default connect( mapStateToProps, null)(TeamInput)
+export default connect( mapStateToProps, null)(TeamHomePage)

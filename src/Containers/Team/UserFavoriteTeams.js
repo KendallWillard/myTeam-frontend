@@ -1,32 +1,44 @@
 import React from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
+import { Row, Col, Container, ListGroup  } from 'react-bootstrap';
+import './Team.css'
 
 export default class UserFavoriteTeams extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      formattedUserTeams: ''
+      formattedUserTeams: '',
+      isLoading: false
     }
   }
 
   handleClick = (event) => {
     event.preventDefault();
-    this.props.changeCurrentTeam(event.target.innerHTML)
-    setTimeout(() => this.props.reMountComponent(), 500 )
+    this.props.changeCurrentTeam(event.target.innerHTML);
+    setTimeout(() => this.props.reMountComponent(), 500 );
+    this.setState({isLoading: true}, this.formatUserTeams);
+    setTimeout(() => this.setState({isLoading: false}, this.formatUserTeams), 600);
   }
 
-  componentDidMount() {
-    console.log('fired')
+  formatUserTeams = () => {
     const formattedUserTeams = this.props.userTeams.map(team => {
       return(
-        <Col 
+        <ListGroup
         key={team.id}
         md="auto"
         onClick={this.handleClick}
-        >{team.name}</Col>
+        id='favorite-team' 
+        >
+        <ListGroup.Item active>
+        {this.state.isLoading ? <p>Loading...</p> : team.name}
+        </ListGroup.Item>
+        </ListGroup>
       )
     })
     this.setState({formattedUserTeams})
+  }
+
+  componentDidMount() {
+    this.formatUserTeams();
   }
 
   

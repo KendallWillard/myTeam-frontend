@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import TextFieldMargins from './Containers/Team/TeamInput';
+import TextFieldMargins from './Containers/Team/TeamHomePage';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginPage from './Containers/LoginPage/LoginForm';
 import SignUpPage from './Components/SignUpPage/SignUpPage';
