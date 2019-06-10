@@ -9,14 +9,27 @@ export default class UserFavoriteTeams extends React.Component {
     }
   }
 
+  handleClick = (event) => {
+    event.preventDefault();
+    this.props.changeCurrentTeam(event.target.innerHTML)
+    setTimeout(() => this.props.reMountComponent(), 500 )
+  }
+
   componentDidMount() {
+    console.log('fired')
     const formattedUserTeams = this.props.userTeams.map(team => {
       return(
-        <Col md="auto">{team.name}</Col>
+        <Col 
+        key={team.id}
+        md="auto"
+        onClick={this.handleClick}
+        >{team.name}</Col>
       )
     })
     this.setState({formattedUserTeams})
   }
+
+  
   render() {
     return(
       <Container>

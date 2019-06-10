@@ -20,12 +20,15 @@ class TeamInput extends React.Component {
       teamNews: [],
       userId: 0,
       jwtToken: '',
-      teamOnlyArticles: [],
       userTeams: [],
       displaysNews: false,
-      redirectToLogin: false,
-      currentTeam: ''
+      redirectToLogin: false
     }
+  }
+
+  changeCurrentTeam = (teamName) => {
+    this.setState({teamName}) 
+    setTimeout(() => this.fetchAndSetNewsArticles(), 100 )
   }
   
   componentDidMount() {
@@ -40,7 +43,7 @@ class TeamInput extends React.Component {
     .then(response => response.json())
     .then(userTeams => this.setState({userTeams}))
     .then(this.getDefaultUserTeam)
-    .then(this.fetchAndParseNewsArticles)
+    .then(this.fetchAndSetNewsArticles)
     .catch(console.error)
   }
 
@@ -59,7 +62,8 @@ class TeamInput extends React.Component {
     })
   }
 
-  fetchAndParseNewsArticles = () => {
+  fetchAndSetNewsArticles = () => {
+    console.log(this.state.teamName)
     fetch(`${FIRST_HALF_NEWS_URL}${this.state.teamName}${SECOND_HALF_NEWS_URL}`)
     .then(response => response.json())
     .then(teamNews => this.setState({teamNews}) )
@@ -88,7 +92,7 @@ class TeamInput extends React.Component {
   
   handleClick = (event) => {
     event.preventDefault();
-    this.fetchAndParseNewsArticles();
+    this.fetchAndSetNewsArticles();
   }
 
   handleTeamSelection = (event) => {
@@ -370,10 +374,12 @@ class TeamInput extends React.Component {
       </MDBDropdownMenu>
     </MDBDropdown>
     { this.state.teamNews.articles &&
-      <UserFavoriteTeams userTeams={this.state.userTeams} />
-    }
-    { this.state.teamNews.articles &&
-        <DisplayTeamArticles teamArticles={this.state.teamNews.articles} teamName={this.state.teamName} />
+        <DisplayTeamArticles 
+        teamArticles={this.state.teamNews.articles} 
+        teamName={this.state.teamName}
+        userTeams={this.state.userTeams} 
+        changeCurrentTeam={this.changeCurrentTeam}
+        />
       } 
 
         </div>
