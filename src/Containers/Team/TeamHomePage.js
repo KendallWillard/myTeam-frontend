@@ -5,9 +5,11 @@ import { Redirect } from 'react-router-dom';
 import { ListGroup, Jumbotron, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
 import DisplayTeamArticles from './DisplayTeamArticles';
+import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
       BASE_HOSTING_URL = `http://localhost:3001`;
+
 
 
 class TeamHomePage extends React.Component {
@@ -126,7 +128,13 @@ class TeamHomePage extends React.Component {
           <Button variant="primary">Learn more</Button>
         </p>
       </Jumbotron>
-      <Container>
+
+      <Container fluid>
+      <Row>
+      <Col sm={2}>
+        <h2>Hello friends</h2>
+      </Col>
+      <Col sm={10}>
         <Button 
           variant="danger"
           onClick={this.logout}
@@ -388,6 +396,8 @@ class TeamHomePage extends React.Component {
         changeCurrentTeam={this.changeCurrentTeam}
         />
       } 
+      </Col>
+      </Row>
       </Container>
         </div>
     );

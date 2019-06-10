@@ -1,3 +1,10 @@
 #favorite-team {
   cursor: pointer;
 }
+
+aside {
+  width: 15%;
+  padding-left: .5rem;
+  margin-left: .5rem;
+  float: left;
+}
