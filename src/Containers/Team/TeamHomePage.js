@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Redirect } from 'react-router-dom';
 import { ListGroup, Jumbotron, Button, Card, Container, Row, Col } from 'react-bootstrap';
-import apiConfig from '../../../apiKeys';
+import apiConfig from '../../apiKeys';
 import DisplayTeamArticles from './DisplayTeamArticles';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
