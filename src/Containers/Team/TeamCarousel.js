@@ -1,6 +1,8 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
+import { timingSafeEqual } from 'crypto';
+import './Team.css'
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=50&apiKey=${apiConfig.newsApi}`;
 
@@ -11,30 +13,29 @@ class ControlledCarousel extends React.Component {
     this.state = {
       index: 0,
       direction: null,
-      userMostRecentTeamsNews: []
+      userMostRecentTeamsNews: '',
+      formattedCarousel: []
     };
   }
 
   formatTheCarousel = () => {
-    return(
-      <Carousel
-      activeIndex={this.state.index}
-      direction={this.state.direction}
-      onSelect={this.handleSelect}
-      >
-      <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src="https://timedotcom.files.wordpress.com/2019/01/patrick-mahomes.jpg"
-          alt="First slide"
-        />
-        <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-        </Carousel.Caption>
-      </Carousel.Item>
-      </Carousel>
-    )
+    const formattedCarousel = this.state.userMostRecentTeamsNews.map(team => {
+      return(
+        <Carousel.Item>
+          <img
+            id="carousel"
+            className="d-block w-100"
+            src={team.urlToImage}
+            alt="First slide"
+          />
+          <Carousel.Caption>
+            <h1>{team.title}</h1>
+            <p>{team.description}</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+      )
+    })
+    this.setState({formattedCarousel})
   }
 
   // Filter all the articles only for ones containing relevent team information
@@ -52,8 +53,9 @@ class ControlledCarousel extends React.Component {
       return null
       })
     console.log('filtered', filteredArticles)
-    this.setState({
-      userMostRecentTeamsNews: filteredArticles[0]
+    this.setState(state => {
+      const userMostRecentTeamsNews = [...state.userMostRecentTeamsNews, filteredArticles[0]]
+      return {userMostRecentTeamsNews}
     })
   } 
 
@@ -62,6 +64,7 @@ class ControlledCarousel extends React.Component {
       fetch(`${FIRST_HALF_NEWS_URL}${userTeam.name}${SECOND_HALF_NEWS_URL}`)
       .then(response => response.json())
       .then(newsArticles => this.parseAndStoreMostRecentNewsArticle(newsArticles, userTeam.name))
+      .then(this.formatTheCarousel)
       .then(console.log)
       .catch(console.error)
     })
@@ -81,51 +84,15 @@ class ControlledCarousel extends React.Component {
 
   render() {
     const { index, direction } = this.state;
-
     return (
       <Carousel
-        activeIndex={index}
-        direction={direction}
-        onSelect={this.handleSelect}
+
+      activeIndex={this.state.index}
+      direction={this.state.direction}
+      onSelect={this.handleSelect}
       >
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://timedotcom.files.wordpress.com/2019/01/patrick-mahomes.jpg"
-            alt="First slide"
-          />
-          <Carousel.Caption>
-            <h3>First slide label</h3>
-            <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://timedotcom.files.wordpress.com/2019/01/patrick-mahomes.jpg"
-            alt="Third slide"
-          />
-
-          <Carousel.Caption>
-            <h3>Second slide label</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-          </Carousel.Caption>
-        </Carousel.Item>
-        <Carousel.Item>
-          <img
-            className="d-block w-100"
-            src="https://timedotcom.files.wordpress.com/2019/01/patrick-mahomes.jpg"
-            alt="Third slide"
-          />
-
-          <Carousel.Caption>
-            <h3>Third slide label</h3>
-            <p>
-              Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
-      </Carousel>
+       {this.state.formattedCarousel}
+       </Carousel>
     );
   }
 }

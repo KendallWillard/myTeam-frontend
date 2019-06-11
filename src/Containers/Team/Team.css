@@ -8,3 +8,7 @@ aside {
   margin-left: .5rem;
   float: left;
 }
+
+#carousel {
+  max-height: 768px;
+}
