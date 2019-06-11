@@ -5,6 +5,7 @@ import { Redirect } from 'react-router-dom';
 import { ListGroup, Jumbotron, Button, Card, Container, Row, Col } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
 import DisplayTeamArticles from './DisplayTeamArticles';
+import TeamCarousel from './TeamCarousel';
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
@@ -116,19 +117,10 @@ class TeamHomePage extends React.Component {
       return <Redirect to='/login' />
     }
     return (
-      <div className="teamInput">      
-      <Jumbotron>
-        <h1>My Teams</h1>
-        <h3>
-          Get the news only for your favorite teams. Don't like that other teams quarterback? Tired
-          of always seeing how 'good' the other team is doing. Well, now you don't have to with My Teams!
-          Only your favorite Teams!
-        </h3>
-        <p>
-          <Button variant="primary">Learn more</Button>
-        </p>
-      </Jumbotron>
-
+      <div className="teamInput">  
+      {this.state.teamNews.articles && 
+        <TeamCarousel userTeams={this.state.userTeams}/>
+      }    
       <Container fluid>
       <Row>
       <Col sm={2}>

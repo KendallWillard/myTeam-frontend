@@ -31,18 +31,6 @@ export default class DisplayTeamArticles extends Component {
 
   // Format "2019-06-08T08:02:17-05:00" to user friendly format -> 
   // 
-
-  // shouldComponentUpdate() {
-  //   if(this.state.teamName !== this.props.teamName) {
-  //     this.setState({teamName: this.props.teamName})
-  //   }
-  //   let parsedArticles = this.parseAllTheArticles();
-  //   // let newparsedArticles = this.transposeDuplicates(parsedArticles)
-  //   this.convertDateToUserFriendly(parsedArticles)
-  //   const formattedArticles = this.formatArticles(parsedArticles)
-  //   this.setState({formattedArticles});
-  // }
-
   convertDateToUserFriendly = (parsedArticles) => {
     parsedArticles.map(article => {
       return( 
@@ -59,6 +47,7 @@ export default class DisplayTeamArticles extends Component {
     this.setState({formattedArticles});
   }
 
+  // FIlter all the articles only for ones containing relevent team information
   parseAllTheArticles = () => {
     return(
       this.props.teamArticles.filter(article =>  {
