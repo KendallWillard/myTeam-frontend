@@ -1,7 +1,7 @@
 import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
-import { Redirect } from 'react-router-dom'
-import '../../Containers/LoginPage/LoginForm.css'
+import { Redirect } from 'react-router-dom';
+import './SignUpPage.css';
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 
@@ -57,7 +57,7 @@ export default class SignUpPage extends React.Component {
     return (
       <MDBContainer id="form-container">
         <MDBRow>
-          <MDBCol md="12">
+          <MDBCol md="6">
             <form>
               <p className="h5 text-center mb-4">Sign Up</p>
               <div className="grey-text">
