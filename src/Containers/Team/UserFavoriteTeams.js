@@ -14,7 +14,9 @@ export default class UserFavoriteTeams extends React.Component {
   handleClick = (event) => {
     event.preventDefault();
     this.props.changeCurrentTeam(event.target.innerHTML);
+    //Must wait to remount due to the fetching of news articles from the news api
     setTimeout(() => this.props.reMountComponent(), 500 );
+    // Handles the Loading... text on the favorite teams
     this.setState({isLoading: true}, this.formatUserTeams);
     setTimeout(() => this.setState({isLoading: false}, this.formatUserTeams), 600);
   }

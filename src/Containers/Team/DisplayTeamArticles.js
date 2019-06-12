@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CardDeck, Card, Col, Row, Container } from 'react-bootstrap'
 import UserFavoriteTeams from './UserFavoriteTeams';
+import './Team.css';
 var moment = require('moment');
 
 
@@ -69,12 +70,12 @@ export default class DisplayTeamArticles extends Component {
     return( 
       parsedArticles.map( (article, ndx) => {
         return(
-          <Col key={Date.now() + ndx} md={4}>
+          <Col key={Date.now() + ndx} md={4} id="cardContainer" >
             <Card>
-              <Card.Img variant="top" src={article.urlToImage} />
+              <Card.Img id="cardImage"  variant="top" src={article.urlToImage} />
               <Card.Body>
                 <Card.Title>{article.title}</Card.Title>
-                <Card.Text>{article.content}</Card.Text>
+                <Card.Text id="cardText">{article.content}</Card.Text>
                 <Card.Link href={article.url}>Source: {article.source.name}</Card.Link>
               </Card.Body>
               <Card.Footer>

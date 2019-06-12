@@ -4,12 +4,14 @@ import TextFieldMargins from './Containers/Team/TeamHomePage';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginPage from './Containers/LoginPage/LoginForm';
 import SignUpPage from './Components/SignUpPage/SignUpPage';
+import Navbar from './Components/Navbar/Navbar';
 
 class App extends Component {
 
   render() {
     return (
         <Router >
+          <Navbar />
           <Route exact path='/home' render={() => {
             return <TextFieldMargins />
           }} />

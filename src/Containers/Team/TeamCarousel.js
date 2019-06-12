@@ -2,7 +2,7 @@ import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
 import { timingSafeEqual } from 'crypto';
-import './Team.css'
+import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=50&apiKey=${apiConfig.newsApi}`;
 
@@ -23,14 +23,14 @@ class ControlledCarousel extends React.Component {
       return(
         <Carousel.Item>
           <img
-            id="carousel"
+            id="carousel-image"
             className="d-block w-100"
             src={team.urlToImage}
             alt="First slide"
           />
           <Carousel.Caption>
-            <h1>{team.title}</h1>
-            <p>{team.description}</p>
+            <h1 id="titleText">{team.title}</h1>
+            <h3 id="descriptionText">{team.description}</h3>
           </Carousel.Caption>
         </Carousel.Item>
       )

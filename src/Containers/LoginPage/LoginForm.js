@@ -49,6 +49,7 @@ class FormPage extends React.Component {
   }
 
   fetchUserInfo = (event) => {
+    const { username, password } = this.state
     event.preventDefault();
     fetch('http://localhost:3001/login', {
       method: 'POST',
@@ -57,10 +58,7 @@ class FormPage extends React.Component {
         Accept: 'application/json'
       },
       body: JSON.stringify({
-        user: {
-         username: this.state.username,
-         password: this.state.password,
-        }
+        user: { username, password }
       })
     })
     .then(response => response.json())

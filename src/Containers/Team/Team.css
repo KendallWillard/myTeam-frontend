@@ -3,12 +3,37 @@
 }
 
 aside {
+  margin-top: 100px;
   width: 15%;
   padding-left: .5rem;
   margin-left: .5rem;
   float: left;
 }
 
-#carousel {
+#carousel-image {
   max-height: 768px;
+}
+
+#current-scores {
+  margin-top: 200px;
+}
+
+#cardImage {
+  height: 171px;
+}
+
+#cardText {
+  height: 120px;
+}
+
+#cardContainer {
+  margin-top: 25px;
+}
+
+#titleText {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#descriptionText {
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
 }

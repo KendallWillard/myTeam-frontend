@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Redirect } from 'react-router-dom';
-import { ListGroup, Jumbotron, Button, Card, Container, Row, Col } from 'react-bootstrap';
+import { Button, Container, Row, Col } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
 import DisplayTeamArticles from './DisplayTeamArticles';
 import TeamCarousel from './TeamCarousel';
+import CurrentScores from './CurrentScores';
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
@@ -123,16 +124,13 @@ class TeamHomePage extends React.Component {
       }    
       <Container fluid>
       <Row>
-      <Col sm={2}>
-        <h2>Hello friends</h2>
+      <Col sm={2} id='current-scores'>
+        {this.state.teamNews.articles &&
+          <CurrentScores userTeams={this.state.userTeams} teamName={this.state.teamName} />
+        }
       </Col>
       <Col sm={10}>
-        <Button 
-          variant="danger"
-          onClick={this.logout}
-        >
-          Logout
-        </Button>
+
         <MDBDropdown>
       <MDBDropdownToggle caret color="primary">
         Add a Favorite Team
