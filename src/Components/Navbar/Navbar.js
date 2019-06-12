@@ -25,6 +25,75 @@ export default class myNavbar extends Component {
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>
       <MDBDropdown dropright>
+          <MDBDropdownToggle caret color="info">
+            MLB
+          </MDBDropdownToggle>
+          <MDBDropdownMenu basic>
+            <MDBDropdown dropright>
+              <MDBDropdownToggle caret color="danger">
+                American
+              </MDBDropdownToggle>
+              <MDBDropdownMenu basic>
+                <MDBDropdownItem>East</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >New York Yankees</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Tampa Bay Rays">Tampa Bay Rays</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Boston Red Sox">Boston Red Sox</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Toronto Blue Jays">Toronto Blue Jays</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Baltimore Orioles">Baltimore Orioles</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem>Central</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Minnesota Twins</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">Cleveland Indians</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago White Sox">Chicago White Sox</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Detroirt Tigers">Detroirt Tigers</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Kansas City Royals">Kansas City Royals</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem>West</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Houston Astros">Houston Astros</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Texas Ranger">Texas Ranger</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Oakland Athletics">Oakland Athletics</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Los Angeles Angels">Los Angeles Angels</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Seattle Mariners">Seattle Mariners</MDBDropdownItem>
+                <MDBDropdownItem divider />
+              </MDBDropdownMenu>
+            </MDBDropdown>
+              <MDBDropdown dropright>
+                <MDBDropdownToggle caret color="primary">
+                  National
+                </MDBDropdownToggle>
+                <MDBDropdownMenu basic>
+                <MDBDropdownItem>East</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Philadelphia Phillies">Philadelphia Phillies</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Atlanta Braves">Atlanta Braves</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Mets">New York Mets</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Washington Nationals">Washington Nationals</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Miami Marlins">Miami Marlins</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem>Central</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago Cubs">Chicago Cubs</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Milwaukee Brewers">Milwaukee Brewers</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="St. Louis Cardinals">St. Louis Cardinals</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Pittsburgh Pirates">Pittsburgh Pirates</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cincinnati Reds">Cincinnati Reds</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem>West</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Los Angeles Dodgers">Los Angeles Dodgers</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Colorado Rockies">Colorado Rockies</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="San Diego Padres">San Diego Padres</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Arizona Diamondbacks">Arizona Diamondbacks</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="San Francisco Giants">San Francisco Giants</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                </MDBDropdownMenu>
+              </MDBDropdown>
+          </MDBDropdownMenu>
+        </MDBDropdown>
+      <MDBDropdown dropright>
           <MDBDropdownToggle caret color="warning">
             NFL
           </MDBDropdownToggle>
@@ -150,75 +219,7 @@ export default class myNavbar extends Component {
             </MDBDropdown>
           </MDBDropdownMenu>
         </MDBDropdown>
-        <MDBDropdown dropright>
-          <MDBDropdownToggle caret color="info">
-            MLB
-          </MDBDropdownToggle>
-          <MDBDropdownMenu basic>
-            <MDBDropdown dropright>
-              <MDBDropdownToggle caret color="danger">
-                American
-              </MDBDropdownToggle>
-              <MDBDropdownMenu basic>
-                <MDBDropdownItem>East</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >New York Yankees</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Tampa Bay Rays">Tampa Bay Rays</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Boston Red Sox">Boston Red Sox</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Toronto Blue Jays">Toronto Blue Jays</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Baltimore Orioles">Baltimore Orioles</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem>Central</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Minnesota Twins</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">Cleveland Indians</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago White Sox">Chicago White Sox</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Detroirt Tigers">Detroirt Tigers</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Kansas City Royals">Kansas City Royals</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem>West</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Houston Astros">Houston Astros</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Texas Ranger">Texas Ranger</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Oakland Athletics">Oakland Athletics</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Los Angeles Angels">Los Angeles Angels</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Seattle Mariners">Seattle Mariners</MDBDropdownItem>
-                <MDBDropdownItem divider />
-              </MDBDropdownMenu>
-            </MDBDropdown>
-              <MDBDropdown dropright>
-                <MDBDropdownToggle caret color="primary">
-                  National
-                </MDBDropdownToggle>
-                <MDBDropdownMenu basic>
-                <MDBDropdownItem>East</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Philadelphia Phillies">Philadelphia Phillies</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Atlanta Braves">Atlanta Braves</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Mets">New York Mets</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Washington Nationals">Washington Nationals</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Miami Marlins">Miami Marlins</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem>Central</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago Cubs">Chicago Cubs</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Milwaukee Brewers">Milwaukee Brewers</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="St. Louis Cardinals">St. Louis Cardinals</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Pittsburgh Pirates">Pittsburgh Pirates</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cincinnati Reds">Cincinnati Reds</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem>West</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Los Angeles Dodgers">Los Angeles Dodgers</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Colorado Rockies">Colorado Rockies</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="San Diego Padres">San Diego Padres</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Arizona Diamondbacks">Arizona Diamondbacks</MDBDropdownItem>
-                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="San Francisco Giants">San Francisco Giants</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                </MDBDropdownMenu>
-              </MDBDropdown>
-          </MDBDropdownMenu>
-        </MDBDropdown>
+        
         <MDBDropdown dropright>
           <MDBDropdownToggle caret color="primary">
             MLS
