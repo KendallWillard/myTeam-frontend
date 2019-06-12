@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Redirect } from 'react-router-dom';
+import './Navbar.css';
 
 export default class myNavbar extends Component {
 
@@ -13,13 +14,13 @@ export default class myNavbar extends Component {
 
   render() {
     return(
-      <Navbar bg="dark" variant="dark" fixed="top">
-      <Navbar.Brand href="/home">My Teams</Navbar.Brand>
+      <Navbar fixed="top">
+      <Navbar.Brand id="navbarContainer" href="/home">My Teams</Navbar.Brand>
       <Nav className="mr-auto">
-        <Button variant="success" href='/home' >Home</Button>
-        <Button variant="warning" href='/info' >Info</Button>
+        <Button id="homeButton" variant="success" href='/home' >Home</Button>
+        <Button id="homeButton" variant="warning" href='/info' >Info</Button>
         <MDBDropdown>
-      <MDBDropdownToggle caret color="primary">
+      <MDBDropdownToggle id="homeButton" caret color="primary">
         Add a Favorite Team
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>

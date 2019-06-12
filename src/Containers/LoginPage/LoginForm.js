@@ -15,7 +15,7 @@ import { Redirect } from 'react-router-dom'
 import './LoginForm.css'
 import { connect } from 'react-redux';
 import { setUserInfo } from '../../Actions/setUserInfo';
-// import { responsiveFontSizes } from "@material-ui/core/styles";
+const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 class FormPage extends React.Component {
   state = {
@@ -51,7 +51,7 @@ class FormPage extends React.Component {
   fetchUserInfo = (event) => {
     const { username, password } = this.state
     event.preventDefault();
-    fetch('http://localhost:3001/login', {
+    fetch(`${BASE_HOSTING_URL}/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

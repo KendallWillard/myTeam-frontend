@@ -10,7 +10,7 @@ import Navbar from '../../Components/Navbar/Navbar';
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
-      BASE_HOSTING_URL = `http://localhost:3001`;
+      BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 
 

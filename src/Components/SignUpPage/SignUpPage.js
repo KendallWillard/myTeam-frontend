@@ -2,7 +2,8 @@ import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
 import { Redirect } from 'react-router-dom'
 import '../../Containers/LoginPage/LoginForm.css'
-// import { responsiveFontSizes } from "@material-ui/core/styles";
+const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
+
 
 export default class SignUpPage extends React.Component {
   state = {
@@ -23,7 +24,7 @@ export default class SignUpPage extends React.Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    fetch('http://localhost:3001/users', {
+    fetch(`${BASE_HOSTING_URL}/users`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
