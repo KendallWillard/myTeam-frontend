@@ -55,7 +55,7 @@ class ControlledCarousel extends React.Component {
         }
       return null
       })
-    console.log('filtered', filteredArticles)
+
     this.setState(state => {
       const userMostRecentTeamsNews = [...state.userMostRecentTeamsNews, filteredArticles[0]]
       return {userMostRecentTeamsNews}
@@ -68,7 +68,6 @@ class ControlledCarousel extends React.Component {
       .then(response => response.json())
       .then(newsArticles => this.parseAndStoreMostRecentNewsArticle(newsArticles, userTeam.name))
       .then(this.formatTheCarousel)
-      .then(console.log)
       .catch(console.error)
     })
   }
