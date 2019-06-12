@@ -1,6 +1,7 @@
 #form-container {
   height: 100vh;
-  display: flex;
+  margin-left: 30%;
+  margin-top: 10%;
   align-items: center;
   justify-content: center;
 }
@@ -8,4 +9,8 @@
 #sign-up {
   color: blue;
   cursor: pointer;
+}
+
+#formParent {
+  display: flex;
 }

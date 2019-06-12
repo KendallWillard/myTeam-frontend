@@ -17,6 +17,7 @@ import { connect } from 'react-redux';
 import { setUserInfo } from '../../Actions/setUserInfo';
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
+
 class FormPage extends React.Component {
   state = {
     username: '',
@@ -84,7 +85,8 @@ class FormPage extends React.Component {
       return <Redirect to='/signup' />
     }
     return (
-      <MDBContainer>
+      <div className="formParent">
+      <MDBContainer id="form-container">
       <MDBRow>
         <MDBCol md="6">
           <MDBCard>
@@ -144,6 +146,7 @@ class FormPage extends React.Component {
       {this.state.incorrectPassword ? <h1>Error! Incorrect Username or Password</h1> : null}
 
     </MDBContainer>
+    </div>
     );
   };
 };
