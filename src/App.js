@@ -6,6 +6,7 @@ import LoginPage from './Containers/LoginPage/LoginForm';
 import SignUpPage from './Components/SignUpPage/SignUpPage';
 import Navbar from './Components/Navbar/Navbar';
 import InfoPage from './Components/Info/InfoPage';
+import WelcomePage from './Components/WelcomePage/WelcomePage';
 
 class App extends Component {
 
@@ -20,6 +21,9 @@ class App extends Component {
           }} />
           <Route exact path='/signup' render={() => {
             return <SignUpPage />
+          }} />  
+          <Route exact path='/' render={() => {
+            return <WelcomePage />
           }} />
           <Route exact path='/info' render={() => {
             return <InfoPage />
