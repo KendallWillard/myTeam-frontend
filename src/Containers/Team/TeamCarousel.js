@@ -1,6 +1,7 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
+import { Redirect } from 'react-router-dom';
 import { timingSafeEqual } from 'crypto';
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
@@ -22,12 +23,14 @@ class ControlledCarousel extends React.Component {
     const formattedCarousel = this.state.userMostRecentTeamsNews.map(team => {
       return(
         <Carousel.Item>
-          <img
-            id="carousel-image"
-            className="d-block w-100"
-            src={team.urlToImage}
-            alt="First slide"
-          />
+          <a href={team.url}>
+            <img
+              id="carousel-image"
+              className="d-block w-100"
+              src={team.urlToImage}
+              alt="First slide"
+            />
+          </a>
           <Carousel.Caption>
             <h1 id="titleText">{team.title}</h1>
             <h3 id="descriptionText">{team.description}</h3>

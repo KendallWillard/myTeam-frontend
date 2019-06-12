@@ -131,8 +131,6 @@ class TeamHomePage extends React.Component {
         }
       </Col>
       <Col sm={10}>
-
-        
     { this.state.teamNews.articles &&
         <DisplayTeamArticles 
         teamArticles={this.state.teamNews.articles} 
