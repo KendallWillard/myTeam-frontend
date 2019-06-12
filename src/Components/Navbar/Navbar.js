@@ -8,11 +8,30 @@ export default class myNavbar extends Component {
 
   constructor(props) {
     super(props)
-
+    
+    this.state = {
+      redirectToLogin: false
+    }
   }
 
 
+
+  redirectToLogin = () => {
+    this.setState({redirectToLogin: true});
+  }
+
+
+  logout = (event) => {
+    event.preventDefault();
+    window.localStorage.removeItem('username')
+    window.localStorage.removeItem('jwtToken')
+    this.redirectToLogin();
+  }
+
   render() {
+    if(this.state.redirectToLogin) {
+      return <Redirect to="/login" />
+    }
     return(
       <Navbar fixed="top">
       <Navbar.Brand id="navbarContainer" href="/home">My Teams</Navbar.Brand>
