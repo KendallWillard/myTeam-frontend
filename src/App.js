@@ -5,13 +5,13 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LoginPage from './Containers/LoginPage/LoginForm';
 import SignUpPage from './Components/SignUpPage/SignUpPage';
 import Navbar from './Components/Navbar/Navbar';
+import InfoPage from './Components/Info/InfoPage';
 
 class App extends Component {
 
   render() {
     return (
         <Router >
-          <Navbar />
           <Route exact path='/home' render={() => {
             return <TextFieldMargins />
           }} />
@@ -20,6 +20,9 @@ class App extends Component {
           }} />
           <Route exact path='/signup' render={() => {
             return <SignUpPage />
+          }} />
+          <Route exact path='/info' render={() => {
+            return <InfoPage />
           }} />
         </Router>
     );
