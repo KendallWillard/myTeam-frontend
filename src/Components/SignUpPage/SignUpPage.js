@@ -12,7 +12,7 @@ export default class SignUpPage extends React.Component {
     username: '',
     password: '',
     phone: '',
-    signedUp: false
+    redirectToLogin: false
   }
 
   handleChange = (event) => {
@@ -46,12 +46,12 @@ export default class SignUpPage extends React.Component {
   }
 
   redirectToLogin = () => {
-    this.setState({signedUp: true})
+    this.setState({redirectToLogin: true})
   }
 
 
   render() {
-    if(this.state.signedUp) {
+    if(this.state.redirectToLogin || this.state.redirectToLogin) {
       return <Redirect to='/login' />
     }
     return (
@@ -122,6 +122,8 @@ export default class SignUpPage extends React.Component {
               </div>
               <div className="text-center">
                 <MDBBtn onClick={this.handleSubmit}>Sign Up</MDBBtn>
+                <MDBBtn color="warngin" onClick={this.redirectToLogin}>Sign Up</MDBBtn>
+
               </div>
             </form>
           </MDBCol>
