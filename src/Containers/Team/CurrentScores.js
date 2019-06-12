@@ -1,6 +1,6 @@
 import React from 'react';
 import { ListGroup } from 'react-bootstrap';
-const BASE_MLB_URL = 'http://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard'
+const BASE_MLB_URL = 'https://site.api.espn.com/apis/site/v2/sports/baseball/mlb/scoreboard'
 
 export default class CurrentScores extends React.Component {
   constructor(props) {
