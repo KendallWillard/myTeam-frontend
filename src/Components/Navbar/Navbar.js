@@ -13,7 +13,7 @@ export default class myNavbar extends Component {
 
   render() {
     return(
-      <Navbar bg="dark" variant="dark">
+      <Navbar bg="dark" variant="dark" fixed="top">
       <Navbar.Brand href="/home">My Teams</Navbar.Brand>
       <Nav className="mr-auto">
         <Button variant="success" href='/home' >Home</Button>
