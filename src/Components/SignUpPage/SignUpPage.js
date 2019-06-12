@@ -51,7 +51,7 @@ export default class SignUpPage extends React.Component {
 
 
   render() {
-    if(this.state.redirectToLogin || this.state.redirectToLogin) {
+    if(this.state.redirectToLogin) {
       return <Redirect to='/login' />
     }
     return (
