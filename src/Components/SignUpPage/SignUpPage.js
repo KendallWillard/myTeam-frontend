@@ -122,7 +122,7 @@ export default class SignUpPage extends React.Component {
               </div>
               <div className="text-center">
                 <MDBBtn onClick={this.handleSubmit}>Sign Up</MDBBtn>
-                <MDBBtn color="warngin" onClick={this.redirectToLogin}>Sign Up</MDBBtn>
+                <MDBBtn color="warning" onClick={this.redirectToLogin}>Sign Up</MDBBtn>
 
               </div>
             </form>
