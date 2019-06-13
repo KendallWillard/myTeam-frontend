@@ -100,6 +100,8 @@ class TeamHomePage extends React.Component {
     const { value } = event.target
     this.setState({teamName: value})
     this.postNewTeamWithUser(value)
+    this.fetchAndSetNewsArticles();
+    setTimeout(() => window.location.reload(true), 1000)
     // window.location.reload(true)
   }
 
