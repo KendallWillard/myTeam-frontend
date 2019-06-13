@@ -100,7 +100,7 @@ class TeamHomePage extends React.Component {
     const { value } = event.target
     this.setState({teamName: value})
     this.postNewTeamWithUser(value)
-    window.location.reload(true)
+    // window.location.reload(true)
   }
 
 
