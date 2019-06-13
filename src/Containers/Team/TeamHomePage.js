@@ -100,14 +100,9 @@ class TeamHomePage extends React.Component {
     const { value } = event.target
     this.setState({teamName: value})
     this.postNewTeamWithUser(value)
+    window.location.reload(true)
   }
 
-  logout = (event) => {
-    event.preventDefault();
-    window.localStorage.removeItem('username')
-    window.localStorage.removeItem('jwtToken')
-    this.redirectToLogin();
-  }
 
   redirectToLogin = () => {
     this.setState({redirectToLogin: true})
