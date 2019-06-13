@@ -8,6 +8,7 @@ import TeamCarousel from './TeamCarousel';
 import CurrentScores from './CurrentScores';
 import Navbar from '../../Components/Navbar/Navbar';
 import './Team.css';
+
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
       BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
@@ -22,6 +23,7 @@ class TeamHomePage extends React.Component {
       teamNews: [],
       userId: 0,
       jwtToken: '',
+      button: '',
       userTeams: [],
       displaysNews: false,
       redirectToLogin: false
@@ -101,6 +103,7 @@ class TeamHomePage extends React.Component {
     this.setState({teamName: value})
     this.postNewTeamWithUser(value)
     this.fetchAndSetNewsArticles();
+
     setTimeout(() => window.location.reload(true), 1000)
     // window.location.reload(true)
   }

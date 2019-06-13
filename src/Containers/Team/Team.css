@@ -3,6 +3,10 @@
   cursor: pointer;
 }
 
+#favorite-team:hover {
+  color: black;
+}
+
 aside {
   margin-top: 100px;
   width: 15%;

@@ -14,8 +14,6 @@ export default class myNavbar extends Component {
     }
   }
 
-
-
   redirectToLogin = () => {
     this.setState({redirectToLogin: true});
   }

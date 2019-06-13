@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, Col, Container, ListGroup  } from 'react-bootstrap';
+import { Row, ButtonToolbar, Button, Container, ListGroup  } from 'react-bootstrap';
 import './Team.css'
 
 export default class UserFavoriteTeams extends React.Component {
@@ -24,16 +24,14 @@ export default class UserFavoriteTeams extends React.Component {
   formatUserTeams = () => {
     const formattedUserTeams = this.props.userTeams.map(team => {
       return( 
-        <ListGroup
+        <Button
         key={team.id}
-        md="auto"
+        variant="info"
         onClick={this.handleClick}
         id='favorite-team' 
         >
-        <ListGroup.Item active>
         {this.state.isLoading ? <p>Loading...</p> : team.name}
-        </ListGroup.Item>
-        </ListGroup>
+        </Button>
       )
     })
     this.setState({formattedUserTeams})
@@ -48,7 +46,9 @@ export default class UserFavoriteTeams extends React.Component {
     return(
       <Container>
         <Row className="justify-content-md-center">
-          {this.state.formattedUserTeams}
+          <ButtonToolbar>
+            {this.state.formattedUserTeams}
+          </ButtonToolbar>
         </Row>
         </Container>
     )
