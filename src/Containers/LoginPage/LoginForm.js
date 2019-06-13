@@ -14,8 +14,6 @@ import {
 
 import { Redirect } from 'react-router-dom'
 import './LoginForm.css'
-import { connect } from 'react-redux';
-import { setUserInfo } from '../../Actions/setUserInfo';
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 

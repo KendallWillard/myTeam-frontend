@@ -1,5 +1,5 @@
 import React from 'react';
-import { Row, ButtonToolbar, Button, Container, ListGroup  } from 'react-bootstrap';
+import { Row, ButtonToolbar, Button, Container } from 'react-bootstrap';
 import './Team.css'
 
 export default class UserFavoriteTeams extends React.Component {

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Carousel } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
-import { Redirect } from 'react-router-dom';
-import { timingSafeEqual } from 'crypto';
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
       SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=50&apiKey=${apiConfig.newsApi}`;
@@ -64,7 +62,7 @@ class ControlledCarousel extends React.Component {
 
   fetchUserTeamsMostRecentStory = () => {
     this.props.userTeams.map((userTeam, ndx) => {
-      fetch(`${FIRST_HALF_NEWS_URL}${userTeam.name}${SECOND_HALF_NEWS_URL}`)
+      return fetch(`${FIRST_HALF_NEWS_URL}${userTeam.name}${SECOND_HALF_NEWS_URL}`)
       .then(response => response.json())
       .then(newsArticles => this.parseAndStoreMostRecentNewsArticle(newsArticles, userTeam.name))
       .then(this.formatTheCarousel)
@@ -88,9 +86,8 @@ class ControlledCarousel extends React.Component {
     const { index, direction } = this.state;
     return (
       <Carousel
-
-      activeIndex={this.state.index}
-      direction={this.state.direction}
+      activeIndex={index}
+      direction={direction}
       onSelect={this.handleSelect}
       >
        {this.state.formattedCarousel}

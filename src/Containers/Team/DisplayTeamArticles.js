@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CardDeck, Card, Col, Row, Container } from 'react-bootstrap'
+import { CardDeck, Card, Col, Row } from 'react-bootstrap'
 import UserFavoriteTeams from './UserFavoriteTeams';
 import './Team.css';
 var moment = require('moment');
@@ -103,7 +103,7 @@ export default class DisplayTeamArticles extends Component {
         <UserFavoriteTeams 
         userTeams={this.props.userTeams} 
         changeCurrentTeam={this.props.changeCurrentTeam} 
-        reMountComponent = {this.reMountComponent}
+        reMountComponent={this.reMountComponent}
         />
         <CardDeck>
           <Row>

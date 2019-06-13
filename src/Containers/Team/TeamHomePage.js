@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Button, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
 import DisplayTeamArticles from './DisplayTeamArticles';
 import TeamCarousel from './TeamCarousel';
@@ -38,6 +38,8 @@ class TeamHomePage extends React.Component {
   }
   
   componentDidMount() {
+    let currentDate = moment().format("YYYY-MMM-D").toUpperCase();
+    this.setState({currentDate})
     const userId = parseInt( window.localStorage.getItem('userID') ),
           jwtToken = window.localStorage.getItem('jwtToken')
     this.setState({userId, jwtToken})
@@ -50,6 +52,7 @@ class TeamHomePage extends React.Component {
     .then(userTeams => this.setState({userTeams}))
     .then(this.getDefaultUserTeam)
     .then(this.fetchAndSetNewsArticles)
+    .then(this.getNext10Dates)
     .catch(console.error)
   }
 
@@ -111,10 +114,15 @@ class TeamHomePage extends React.Component {
   }
 
   fetchUpcomingGames = () => {
-    fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/2019-JUN-14?key=${apiConfig.sportsdataApi}`)
-    .then(response => response.json())
-    .then(this.parseUpcomingGames)
-    .catch(console.error)
+    let dateOnly = this.state.currentDate.split('-')[2]; // Get the date only  
+    let monthOnly = this.state.currentDate.split('-')[1];
+    let yearOnly = this.state.currentDate.split('-')[0];
+    for( let i = 0; i < 10; i++ ) {
+      fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly++}?key=${apiConfig.sportsdataApi}`)
+      .then(response => response.json())
+      .then(this.parseUpcomingGames)
+      .catch(console.error)
+    }
   }
 
   parseUpcomingGames = (games) => {
@@ -127,12 +135,12 @@ class TeamHomePage extends React.Component {
         channel: game.Channel
       }
     })
+    console.log(favTeamGamesOnly)
     this.setState(state => {
       const upcomingGames = [...state.upcomingGames, favTeamGamesOnly]
       return {upcomingGames}
     })
-    let currentDate = moment().format("YYYY-MMM-D")
-    console.log(currentDate)
+
   }
   redirectToLogin = () => {
     this.setState({redirectToLogin: true})
