@@ -7,6 +7,7 @@ import DisplayTeamArticles from './DisplayTeamArticles';
 import TeamCarousel from './TeamCarousel';
 import CurrentScores from './CurrentScores';
 import Navbar from '../../Components/Navbar/Navbar';
+var moment = require('moment')
 import './Team.css';
 
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
@@ -25,6 +26,7 @@ class TeamHomePage extends React.Component {
       jwtToken: '',
       button: '',
       userTeams: [],
+      upcomingGames: [],
       displaysNews: false,
       redirectToLogin: false
     }
@@ -67,6 +69,7 @@ class TeamHomePage extends React.Component {
   }
 
   fetchAndSetNewsArticles = () => {
+    this.fetchUpcomingGames();
     fetch(`${FIRST_HALF_NEWS_URL}${this.state.teamName}${SECOND_HALF_NEWS_URL}`)
     .then(response => response.json())
     .then(teamNews => this.setState({teamNews}) )
@@ -105,12 +108,97 @@ class TeamHomePage extends React.Component {
     this.fetchAndSetNewsArticles();
 
     setTimeout(() => window.location.reload(true), 1000)
-    // window.location.reload(true)
   }
 
+  fetchUpcomingGames = () => {
+    fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/2019-JUN-14?key=${apiConfig.sportsdataApi}`)
+    .then(response => response.json())
+    .then(this.parseUpcomingGames)
+    .catch(console.error)
+  }
 
+  parseUpcomingGames = (games) => {
+    const favTeamGamesOnly = games.filter( game => game.AwayTeam.includes( this.abbreviateMLBteam() ) || game.HomeTeam.includes( this.abbreviateMLBteam() ) )
+    favTeamGamesOnly.map(game => {
+      return {
+        homeTeam: game.HomeTeam,
+        awayTeam: game.AwayTeam,
+        time: game.DateTime,
+        channel: game.Channel
+      }
+    })
+    this.setState(state => {
+      const upcomingGames = [...state.upcomingGames, favTeamGamesOnly]
+      return {upcomingGames}
+    })
+    let currentDate = moment().format("YYYY-MMM-D")
+    console.log(currentDate)
+  }
   redirectToLogin = () => {
     this.setState({redirectToLogin: true})
+  }
+
+  abbreviateMLBteam = () => {
+    switch ( this.state.teamName ) {
+      case 'Baltimore Orioles':
+        return 'BAL';
+      case 'Boston Red Sox':
+        return 'BOS';
+      case 'Chicago White Sox':
+        return 'CHW';
+      case 'Cleveland Indians':
+        return 'CLE';
+      case 'Detroit Tigers':
+        return 'DET';
+      case 'Houston Astros':
+        return 'HOU';
+      case 'Kansas City Royals':
+        return 'KC';
+      case 'Los Angeles Angels':
+        return 'LAA';
+      case 'Oakland Athletics':
+        return 'OAK';
+      case 'Seattle Mariners':
+        return 'SEA';
+      case 'Tampa Bay Rays':
+        return 'TB';
+      case 'Texas Rangers':
+        return 'TEX';
+      case 'Toronto Blue Jays':
+        return 'TOR';
+      case 'Arizona Diamondbacks':
+        return 'ARI';
+      case 'Atlanta Braves':
+        return 'ATL';
+      case 'Chicago Cubs':
+        return 'CHC';
+      case 'Cincinnati Reds':
+        return 'CIN';
+      case 'Colorado Rockies':
+        return 'COL';
+      case 'Los Angeles Dodgers':
+        return 'LAD';
+      case 'Miami Marlins':
+        return 'MIA';
+      case 'Milwaukee':
+        return 'MIL';
+      case 'New York Mets':
+        return 'NYM';
+      case 'Philadelphia Phillies':
+        return 'PHI';
+      case 'Pittsburgh Pirates':
+        return 'PIT';
+      case 'San Diego Padres':
+        return 'SD';
+      case 'San Francisco Giants':
+        return 'SF';
+      case 'St. Louis Cardinals':
+        return 'STL';
+      case 'Washington Nationals':
+        return 'WAS';
+      case 'New York Yankees':
+        return 'NYY';
+    }
   }
 
   render() {

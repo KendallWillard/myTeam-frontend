@@ -19,7 +19,7 @@ import { setUserInfo } from '../../Actions/setUserInfo';
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 
-class FormPage extends React.Component {
+export default class FormPage extends React.Component {
   state = {
     username: '',
     password: '',
@@ -37,7 +37,6 @@ class FormPage extends React.Component {
   }
   
   handleLogin = ( {message, user, jwt} ) => {
-    this.props.setUserInfo(user.id, jwt);
     if( message === 'Invalid username or password' ) 
     {
       this.setState({loggedIn: false, incorrectPassword: true});
@@ -78,6 +77,9 @@ class FormPage extends React.Component {
     this.setState({signUpPage: true})
   }
 
+  componentDidMount() {
+    console.log('mounted')
+  }
   render() {
     if(this.state.loggedIn) {
       return <Redirect to='/home' />
@@ -152,8 +154,3 @@ class FormPage extends React.Component {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  setUserInfo: (id, jwtToken) => dispatch(setUserInfo(id, jwtToken))
-})
-
-export default connect( null, mapDispatchToProps)(FormPage)
