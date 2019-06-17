@@ -260,7 +260,7 @@ class TeamHomePage extends React.Component {
         {this.state.teamNews.articles &&
           <UpcomingGames upcomingGames={this.state.upcomingGames} />
         }
-      <Button id='removeTeam' variant="danger" onClick={this.destoryFavoriteUserTeam} >Delete Team</Button>
+      <Button id='removeTeam' variant="danger" onClick={this.destoryFavoriteUserTeam} >Delete {this.state.teamName}</Button>
       </Col>
       <Col sm={10}>
     { this.state.teamNews.articles &&
