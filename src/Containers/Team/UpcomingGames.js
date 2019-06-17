@@ -24,7 +24,6 @@ export default class UpcomingGames extends React.Component {
 
   formatUpcomingGames = () => {
     const upcomingGames = this.props.upcomingGames.map(game => {
-      console.log(game)
       if(game[0]) {
         return(
           <ListGroup>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
 import DisplayTeamArticles from './DisplayTeamArticles';
 import TeamCarousel from './TeamCarousel';
@@ -10,9 +10,8 @@ import Navbar from '../../Components/Navbar/Navbar';
 import UpcomingGames from './UpcomingGames';
 var moment = require('moment')
 import './Team.css';
-
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
-      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
+      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApiTwo}`,
       BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 
@@ -24,6 +23,7 @@ class TeamHomePage extends React.Component {
       teamName: '',
       teamNews: [],
       userId: 0,
+      teamId: 0,
       jwtToken: '',
       button: '',
       userTeams: [],
@@ -62,7 +62,10 @@ class TeamHomePage extends React.Component {
   }
 
   getDefaultUserTeam = () => {
-    this.setState({teamName: this.state.userTeams[0].name})
+    this.setState({
+      teamName: this.state.userTeams[0].name,
+      teamId: this.state.userTeams[0].id
+    })
   }
 
   handleChange = (event) => {
@@ -70,6 +73,25 @@ class TeamHomePage extends React.Component {
     this.setState({
       [name]: value
     })
+  }
+
+  getCurrentTeamId = () => {
+    // Retrieve the current team selected from user teams stored in state and then grab its ID
+     return ( this.state.userTeams.filter(team => team.name === this.state.teamName) )[0].id
+  }
+
+  destoryFavoriteUserTeam = () => {
+    const currTeamID = this.getCurrentTeamId();
+    fetch(`${BASE_HOSTING_URL}/users/${this.state.userId}/teams/${currTeamID}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.state.jwtToken}`
+      }
+    })
+    .catch(console.error)
+    setTimeout(() => window.location.reload(true), 300)
   }
 
   fetchAndSetNewsArticles = () => {
@@ -121,9 +143,7 @@ class TeamHomePage extends React.Component {
     let monthOnly = originalMonth.toUpperCase(); // Month Only
     let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
       // Retrieve all the games left in the current month
-      while(dateOnly++ < 31) {
-      console.log('date', dateOnly)
-      console.log('month', monthOnly)
+      while(dateOnly++ < 30) {
       fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly}?key=${apiConfig.sportsdataApi}`)
       .then(response => response.json())
       .then(this.parseUpcomingGames)
@@ -137,6 +157,7 @@ class TeamHomePage extends React.Component {
     this.setState({upcomingGames: []})
   }
 
+  // Only save the games that are relevant to the current team selected by the user
   parseUpcomingGames = (games) => {
     const favTeamGamesOnly = games.filter( game => game.AwayTeam.includes( this.abbreviateMLBteam() ) || game.HomeTeam.includes( this.abbreviateMLBteam() ) )
     const filteredGames = favTeamGamesOnly.map(game => {
@@ -239,6 +260,7 @@ class TeamHomePage extends React.Component {
         {this.state.teamNews.articles &&
           <UpcomingGames upcomingGames={this.state.upcomingGames} />
         }
+      <Button id='removeTeam' variant="danger" onClick={this.destoryFavoriteUserTeam} >Delete Team</Button>
       </Col>
       <Col sm={10}>
     { this.state.teamNews.articles &&
