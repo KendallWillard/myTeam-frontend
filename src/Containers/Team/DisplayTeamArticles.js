@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { CardDeck, Card, Col, Row } from 'react-bootstrap'
 import UserFavoriteTeams from './UserFavoriteTeams';
 import './Team.css';
-var moment = require('moment');
+const moment = require('moment');
 
 
 export default class DisplayTeamArticles extends Component {

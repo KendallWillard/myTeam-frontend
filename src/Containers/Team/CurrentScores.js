@@ -43,6 +43,7 @@ export default class CurrentScores extends React.Component {
           <ListGroup.Item variant="danger">VS</ListGroup.Item>
           <ListGroup.Item variant="secondary">{game.awayTeam}: {game.awayTeamScore}</ListGroup.Item>
           <ListGroup.Item variant="warning">{game.gameStatus}</ListGroup.Item>
+          <br></br>
         </ListGroup>
 
       )
