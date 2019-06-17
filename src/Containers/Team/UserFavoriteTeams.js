@@ -26,7 +26,7 @@ export default class UserFavoriteTeams extends React.Component {
       return( 
         <Button
         key={team.id}
-        variant="info"
+        variant=""
         onClick={this.handleClick}
         id='favorite-team' 
         >

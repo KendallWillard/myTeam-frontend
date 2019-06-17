@@ -1,6 +1,8 @@
 #favorite-team {
   margin-top: 26px;
   cursor: pointer;
+  color: white;
+  background-color: rgba(0, 54, 230, 0.297)
 }
 
 #favorite-team:hover {

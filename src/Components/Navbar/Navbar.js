@@ -36,7 +36,7 @@ export default class myNavbar extends Component {
         <Button id="homeButton" variant="success" href='/home' >Home</Button>
         <Button id="homeButton" variant="warning" href='/info' >Info</Button>
         <MDBDropdown>
-      <MDBDropdownToggle id="homeButton" caret color="primary">
+      <MDBDropdownToggle id="homeButton" caret color="">
         Add a Favorite Team
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>
