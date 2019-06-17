@@ -35,7 +35,7 @@ export default class DisplayTeamArticles extends Component {
   convertDateToUserFriendly = (parsedArticles) => {
     parsedArticles.map(article => {
       return( 
-        article.publishedAt = moment(article.publishedAt).utcOffset(-240).format('llll')
+        article.publishedAt = moment(article.publishedAt).utcOffset(-300).format('llll')
       )
     })
   }
@@ -79,7 +79,7 @@ export default class DisplayTeamArticles extends Component {
                 <Card.Link href={article.url}>Source: {article.source.name}</Card.Link>
               </Card.Body>
               <Card.Footer>
-                <small className="text-muted">Last Updated: {article.publishedAt} Eastern</small>
+                <small className="text-muted">Last Updated: {article.publishedAt} Central</small>
               </Card.Footer>
             </Card> 
           </Col>
