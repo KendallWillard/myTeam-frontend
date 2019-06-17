@@ -8,7 +8,6 @@ export default class myNavbar extends Component {
 
   constructor(props) {
     super(props)
-    
     this.state = {
       redirectToLogin: false
     }
@@ -236,7 +235,6 @@ export default class myNavbar extends Component {
             </MDBDropdown>
           </MDBDropdownMenu>
         </MDBDropdown>
-        
         <MDBDropdown dropright>
           <MDBDropdownToggle caret color="primary">
             MLS

@@ -120,20 +120,17 @@ class TeamHomePage extends React.Component {
     let dateOnly = this.state.currentDate.split('-')[2]; // Get the date only  
     let monthOnly = originalMonth.toUpperCase(); // Month Only
     let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
-    console.log(originalMonth)
-    for( let i = 0; i < 10; i++ ) {
-      // if( dateOnly > 31 ) {
-      //   dateOnly = 0;
-      //   monthOnly = ( moment(this.state.currentDate).format('M') + 1 )
-      //   monthOnly = moment()
-      // }
+      // Retrieve all the games left in the current month
+      while(dateOnly++ < 31) {
       console.log('date', dateOnly)
       console.log('month', monthOnly)
-      fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly++}?key=${apiConfig.sportsdataApi}`)
+      fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly}?key=${apiConfig.sportsdataApi}`)
       .then(response => response.json())
       .then(this.parseUpcomingGames)
       .catch(console.error)
     }
+    const upcomingGames = this.state.upcomingGames.sort((alpha, beta) => alpha.time.localeCompare(beta.time))
+    this.setState({upcomingGames})
   }
 
   clearUpcomingGamesState = () => {
