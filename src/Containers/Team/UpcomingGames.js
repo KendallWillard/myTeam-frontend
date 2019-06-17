@@ -31,7 +31,7 @@ export default class UpcomingGames extends React.Component {
             <ListGroup.Item variant="success">{game[0].awayTeam}</ListGroup.Item>
             <ListGroup.Item variant="danger">@</ListGroup.Item>
             <ListGroup.Item variant="secondary">{game[0].homeTeam}</ListGroup.Item>
-            <ListGroup.Item variant="warning">TV Channel: {game[0].channel}</ListGroup.Item>
+            <ListGroup.Item variant="warning">TV Network: {game[0].channel}</ListGroup.Item>
             <ListGroup.Item variant="warning">Time: {moment(game[0].time).utcOffset(-300).format('llll')} Central</ListGroup.Item>
             <br></br>
           </ListGroup>
