@@ -91,7 +91,7 @@ class TeamHomePage extends React.Component {
       }
     })
     .catch(console.error)
-    setTimeout(() => window.location.reload(true), 300)
+    setTimeout(() => window.location.reload(true), 500)
   }
 
   fetchAndSetNewsArticles = () => {
