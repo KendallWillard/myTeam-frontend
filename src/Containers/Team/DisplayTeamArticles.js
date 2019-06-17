@@ -14,7 +14,7 @@ export default class DisplayTeamArticles extends Component {
     }
   }
 
-  // transposeDuplicates = (articles) => {`
+  // transposeDuplicates = (articles) => {
   //   let transposedArticles = [];
   //   transposedArticles.push(articles[0])
   //   console.log(articles)

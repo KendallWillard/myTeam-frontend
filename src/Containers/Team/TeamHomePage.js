@@ -39,7 +39,7 @@ class TeamHomePage extends React.Component {
   }
   
   componentDidMount() {
-    let currentDate = moment().format("YYYY-MMM-D").toUpperCase();
+    let currentDate = moment().format("YYYY-MMM-D");
     this.setState({currentDate})
     const userId = parseInt( window.localStorage.getItem('userID') ),
           jwtToken = window.localStorage.getItem('jwtToken')
@@ -116,10 +116,19 @@ class TeamHomePage extends React.Component {
 
   fetchUpcomingGames = () => {
     this.clearUpcomingGamesState();
+    let originalMonth = this.state.currentDate.split('-')[1]
     let dateOnly = this.state.currentDate.split('-')[2]; // Get the date only  
-    let monthOnly = this.state.currentDate.split('-')[1]; // Month Only
+    let monthOnly = originalMonth.toUpperCase(); // Month Only
     let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
-    for( let i = 0; i < 7; i++ ) {
+    console.log(originalMonth)
+    for( let i = 0; i < 10; i++ ) {
+      // if( dateOnly > 31 ) {
+      //   dateOnly = 0;
+      //   monthOnly = ( moment(this.state.currentDate).format('M') + 1 )
+      //   monthOnly = moment()
+      // }
+      console.log('date', dateOnly)
+      console.log('month', monthOnly)
       fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly++}?key=${apiConfig.sportsdataApi}`)
       .then(response => response.json())
       .then(this.parseUpcomingGames)

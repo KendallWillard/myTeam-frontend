@@ -147,6 +147,14 @@ export default class myNavbar extends Component {
                 <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Indianapolis Colts" name="team">Indianapolis Colts</MDBDropdownItem>
                 <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Tennessee Titans" name="team">Tennessee Titans</MDBDropdownItem>
                 <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Jacksonville Jaguars" name="team">Jacksonville Jaguars</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem>AFC West</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Kansas City Chiefs" name="team">Kansas City Chiefs</MDBDropdownItem>
+                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Denver Broncos" name="team">Denver Broncos</MDBDropdownItem>
+                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Oakland Raiders" name="team">Oakland Raiders</MDBDropdownItem>
+                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Los Angeles Chargers" name="team">Los Angeles Chargers</MDBDropdownItem>
+
               </MDBDropdownMenu>
             </MDBDropdown>
             <MDBDropdown dropright>
