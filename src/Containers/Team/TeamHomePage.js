@@ -7,6 +7,7 @@ import DisplayTeamArticles from './DisplayTeamArticles';
 import TeamCarousel from './TeamCarousel';
 import CurrentScores from './CurrentScores';
 import Navbar from '../../Components/Navbar/Navbar';
+import UpcomingGames from './UpcomingGames';
 var moment = require('moment')
 import './Team.css';
 
@@ -114,10 +115,11 @@ class TeamHomePage extends React.Component {
   }
 
   fetchUpcomingGames = () => {
+    this.clearUpcomingGamesState();
     let dateOnly = this.state.currentDate.split('-')[2]; // Get the date only  
-    let monthOnly = this.state.currentDate.split('-')[1];
-    let yearOnly = this.state.currentDate.split('-')[0];
-    for( let i = 0; i < 10; i++ ) {
+    let monthOnly = this.state.currentDate.split('-')[1]; // Month Only
+    let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
+    for( let i = 0; i < 7; i++ ) {
       fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly++}?key=${apiConfig.sportsdataApi}`)
       .then(response => response.json())
       .then(this.parseUpcomingGames)
@@ -125,9 +127,13 @@ class TeamHomePage extends React.Component {
     }
   }
 
+  clearUpcomingGamesState = () => {
+    this.setState({upcomingGames: []})
+  }
+
   parseUpcomingGames = (games) => {
     const favTeamGamesOnly = games.filter( game => game.AwayTeam.includes( this.abbreviateMLBteam() ) || game.HomeTeam.includes( this.abbreviateMLBteam() ) )
-    favTeamGamesOnly.map(game => {
+    const filteredGames = favTeamGamesOnly.map(game => {
       return {
         homeTeam: game.HomeTeam,
         awayTeam: game.AwayTeam,
@@ -135,10 +141,9 @@ class TeamHomePage extends React.Component {
         channel: game.Channel
       }
     })
-    console.log(favTeamGamesOnly)
     this.setState(state => {
-      const upcomingGames = [...state.upcomingGames, favTeamGamesOnly]
-      return {upcomingGames}
+      const upcomingGames = [...state.upcomingGames, filteredGames]
+      return { upcomingGames }
     })
 
   }
@@ -224,6 +229,9 @@ class TeamHomePage extends React.Component {
       <Col sm={2} id='current-scores'>
         {this.state.teamNews.articles &&
           <CurrentScores userTeams={this.state.userTeams} teamName={this.state.teamName} />
+        }
+        {this.state.teamNews.articles &&
+          <UpcomingGames upcomingGames={this.state.upcomingGames} />
         }
       </Col>
       <Col sm={10}>

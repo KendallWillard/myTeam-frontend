@@ -21,7 +21,7 @@ class ControlledCarousel extends React.Component {
     const formattedCarousel = this.state.userMostRecentTeamsNews.map(team => {
       return(
         <Carousel.Item>
-          <a href={team.url}>
+          <a href={team.url} key={team.id}>
             <img
               id="carousel-image"
               className="d-block w-100"
