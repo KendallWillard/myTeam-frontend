@@ -120,13 +120,6 @@ export default class myNavbar extends Component {
                 AFC
               </MDBDropdownToggle>
               <MDBDropdownMenu basic>
-                <MDBDropdownItem>AFC West</MDBDropdownItem>
-                <MDBDropdownItem divider />
-                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Kansas City Chiefs" name="team">Kansas City Chiefs</MDBDropdownItem>
-                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Denver Broncos" name="team">Denver Broncos</MDBDropdownItem>
-                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Oakland Raiders" name="team">Oakland Raiders</MDBDropdownItem>
-                <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Los Angeles Chargers" name="team">Los Angeles Chargers</MDBDropdownItem>
-                <MDBDropdownItem divider />
                 <MDBDropdownItem>AFC East</MDBDropdownItem>
                 <MDBDropdownItem divider />
                 <MDBDropdownItem onClick={this.props.handleTeamSelection} value="New England Patriots" name="team">New England Patriots</MDBDropdownItem>
@@ -154,7 +147,6 @@ export default class myNavbar extends Component {
                 <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Denver Broncos" name="team">Denver Broncos</MDBDropdownItem>
                 <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Oakland Raiders" name="team">Oakland Raiders</MDBDropdownItem>
                 <MDBDropdownItem onClick={this.props.handleTeamSelection} value="Los Angeles Chargers" name="team">Los Angeles Chargers</MDBDropdownItem>
-
               </MDBDropdownMenu>
             </MDBDropdown>
             <MDBDropdown dropright>
