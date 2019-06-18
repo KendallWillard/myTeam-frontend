@@ -11,6 +11,7 @@ import {
   MDBBtn,
   MDBInput
 } from "mdbreact";
+import { Alert } from 'react-bootstrap';
 import { RingLoader } from 'react-spinners';
 import { Redirect } from 'react-router-dom';
 import { css } from '@emotion/core';
@@ -30,7 +31,8 @@ export default class FormPage extends React.Component {
     loggedIn: false,
     incorrectPassword: false,
     signUpPage: false,
-    loading: false
+    loading: false,
+    show: true
   }
 
   
@@ -50,7 +52,7 @@ export default class FormPage extends React.Component {
       this.setState({loading: true})
       window.localStorage.setItem( 'userID', user.id )
       window.localStorage.setItem( 'jwtToken', jwt ) 
-      setTimeout( () => this.setState({loggedIn: true}), 500 )
+      setTimeout( () => this.setState({loggedIn: true}), 1000 )
     }
   }
 
@@ -73,6 +75,9 @@ export default class FormPage extends React.Component {
     .catch(console.error)
   }
 
+  handleDismiss = () => {
+    this.setState({incorrectPassword: false})
+  }
 
   redirectToHome = (event) => {
     this.setState({loggedIn: true})
@@ -101,7 +106,7 @@ export default class FormPage extends React.Component {
             css={override}
             sizeUnit={"px"}
             size={200}
-            color={'#36D7B7'}
+            color={'#1030D8'}
             loading={this.state.loading}
             />
           </div>
@@ -110,6 +115,14 @@ export default class FormPage extends React.Component {
         {
         !this.state.loading && 
           <MDBContainer id="form-container">
+          {this.state.incorrectPassword &&
+            <Alert variant="danger" onClose={this.handleDismiss} dismissible>
+              <Alert.Heading>Error! Incorrect Username or Password. </Alert.Heading>
+              <p>
+                Please Try Again...
+              </p>
+            </Alert>
+          }
           <MDBRow>
             <MDBCol md="6">
               <MDBCard>
@@ -166,7 +179,6 @@ export default class FormPage extends React.Component {
               </MDBCard>
             </MDBCol>
           </MDBRow>
-          {this.state.incorrectPassword ? <h1>Error! Incorrect Username or Password</h1> : null}
     
         </MDBContainer>
         }
