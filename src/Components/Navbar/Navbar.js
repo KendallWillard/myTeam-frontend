@@ -305,7 +305,9 @@ export default class myNavbar extends Component {
               <MDBDropdownToggle caret color="danger">
                 Eastern
               </MDBDropdownToggle>
-              <MDBDropdownMenu basic>
+              <MDBDropdownMenu id='dropDown' basic>
+                <Row>
+                <Col md={6}>
                 <MDBDropdownItem>Atlantic</MDBDropdownItem>
                 <MDBDropdownItem divider />
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >Tampa Bay Lightning</MDBDropdownItem>
@@ -316,7 +318,8 @@ export default class myNavbar extends Component {
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Buffalo Sabres</MDBDropdownItem>
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">Detroit Red Wings</MDBDropdownItem>
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago White Sox">Ottawa Senators</MDBDropdownItem>
-                <MDBDropdownItem divider />
+                </Col>
+                <Col md={6}>
                 <MDBDropdownItem>Metropolitan</MDBDropdownItem>
                 <MDBDropdownItem divider />
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >Washington Capitals</MDBDropdownItem>
@@ -327,17 +330,17 @@ export default class myNavbar extends Component {
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Philadelphia Flyers</MDBDropdownItem>
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">New York Rangers</MDBDropdownItem>
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago White Sox">New Jersey Devils</MDBDropdownItem>
-                <MDBDropdownItem divider />
+                </Col>        
+                </Row>
               </MDBDropdownMenu>
             </MDBDropdown>
               <MDBDropdown dropright>
                 <MDBDropdownToggle caret color="primary">
                   Western
                 </MDBDropdownToggle>
-
                 <MDBDropdownMenu id='dropDown'>
                 <Row>
-                  <Col md={6}>
+                <Col md={6}>
                 <MDBDropdownItem>Central</MDBDropdownItem>
                 <MDBDropdownItem divider />
                 <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >Nashville Predators</MDBDropdownItem>
