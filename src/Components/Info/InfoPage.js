@@ -4,7 +4,6 @@ import './InfoPage.css';
 
 
 export default class InfoPage extends Component {
-
   render() {
     return(
       <div>
