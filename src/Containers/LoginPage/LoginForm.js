@@ -58,7 +58,6 @@ export default class FormPage extends React.Component {
 
   fetchUserInfo = (event) => {
     let { username, password } = this.state;
-    username = username.toLowerCase();
     event.preventDefault();
     fetch(`${BASE_HOSTING_URL}/login`, {
       method: 'POST',
@@ -173,7 +172,6 @@ export default class FormPage extends React.Component {
                   <MDBModalFooter>
                     <div className="font-weight-light">
                       <p id="sign-up" onClick={this.redirectToSignUpPage}>Not a member? Sign Up</p>
-                      <p id="sign-up">Forgot Password?</p>
                     </div>
                   </MDBModalFooter>
                 </MDBCardBody>

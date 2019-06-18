@@ -1,5 +1,5 @@
 import React from "react";
-import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdbreact';
+import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBIcon } from 'mdbreact';
 import { Redirect } from 'react-router-dom';
 import './SignUpPage.css';
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
@@ -32,7 +32,7 @@ export default class SignUpPage extends React.Component {
       },
       body: JSON.stringify({
      user: {
-      username: this.state.username.toLowerCase(),
+      username: this.state.username,
       password: this.state.password,
       first_name: this.state.firstName,
       last_name: this.state.lastName,
@@ -58,74 +58,82 @@ export default class SignUpPage extends React.Component {
       <MDBContainer id="form-container">
         <MDBRow>
           <MDBCol md="6">
-            <form>
-              <p className="h5 text-center mb-4">Sign Up</p>
-              <div className="grey-text">
-                <MDBInput
-                  label="First Name..."
-                  icon="user-ninja"
-                  group
-                  type="text"
-                  validate
-                  error="wrong"
-                  success="right"
-                  name="firstName"
-                  onChange={this.handleChange}
-                  value={this.state.firstName}
-                />
-                <MDBInput
-                  label="Last Name..."
-                  icon="user-ninja"
-                  group
-                  type="text"
-                  validate
-                  error="wrong"
-                  success="right"
-                  name="lastName"
-                  onChange={this.handleChange}
-                  value={this.state.lastName}
-                />
-                <MDBInput
-                  label="Phone..."
-                  icon="mobile"
-                  group
-                  type="text"
-                  validate
-                  error="wrong"
-                  success="right"
-                  name="phone"
-                  onChange={this.handleChange}
-                  value={this.state.phone}
-                />
-                <MDBInput
-                  label="Username..."
-                  icon="user-ninja"
-                  group
-                  type="text"
-                  validate
-                  error="wrong"
-                  success="right"
-                  name="username"
-                  onChange={this.handleChange}
-                  value={this.state.username}
-                />
-                <MDBInput
-                  label="Password..."
-                  icon="lock"
-                  group
-                  type="password"
-                  validate
-                  onChange={this.handleChange}
-                  name="password"
-                  value={this.state.password}
-                />
-              </div>
-              <div className="text-center">
-                <MDBBtn onClick={this.handleSubmit}>Sign Up</MDBBtn>
-                <MDBBtn color="warning" onClick={this.redirectToLogin}>Login</MDBBtn>
+            <MDBCard>
+              <MDBCardBody>
+              <MDBCardHeader className="form-header deep-blue-gradient rounded">
+                    <h3 className="my-3">
+                      <MDBIcon icon="lock" /> Sign Up:
+                    </h3>
+                  </MDBCardHeader>
+              <form>
+                <div className="grey-text">
+                  <MDBInput
+                    label="First Name..."
+                    icon="user-ninja"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="firstName"
+                    onChange={this.handleChange}
+                    value={this.state.firstName}
+                  />
+                  <MDBInput
+                    label="Last Name..."
+                    icon="user-ninja"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="lastName"
+                    onChange={this.handleChange}
+                    value={this.state.lastName}
+                  />
+                  <MDBInput
+                    label="Phone..."
+                    icon="mobile"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="phone"
+                    onChange={this.handleChange}
+                    value={this.state.phone}
+                  />
+                  <MDBInput
+                    label="Username..."
+                    icon="user-ninja"
+                    group
+                    type="text"
+                    validate
+                    error="wrong"
+                    success="right"
+                    name="username"
+                    onChange={this.handleChange}
+                    value={this.state.username}
+                  />
+                  <MDBInput
+                    label="Password..."
+                    icon="lock"
+                    group
+                    type="password"
+                    validate
+                    onChange={this.handleChange}
+                    name="password"
+                    value={this.state.password}
+                  />
+                </div>
+                <div className="text-center">
+                  <MDBBtn onClick={this.handleSubmit}>Sign Up</MDBBtn>
+                  <MDBBtn color="warning" onClick={this.redirectToLogin}>Login Page</MDBBtn>
 
-              </div>
-            </form>
+                </div>
+              </form>
+            </MDBCardBody>
+            </MDBCard>
           </MDBCol>
         </MDBRow>
       </MDBContainer>
