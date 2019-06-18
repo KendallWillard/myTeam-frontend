@@ -17,6 +17,21 @@ export default class myNavbar extends Component {
     this.setState({redirectToLogin: true});
   }
 
+  componentDidMount() {
+    window.onscroll = function() {changeNavColor()}
+    let navBar = document.getElementById('navBar');
+    function changeNavColor() {
+      if(window.pageYOffset > 597) {
+        navBar.style.backgroundColor = 'black';
+      }
+      else {
+        navBar.style.backgroundColor= '';
+      }
+
+    }
+
+  }
+
 
   logout = (event) => {
     event.preventDefault();
@@ -30,7 +45,7 @@ export default class myNavbar extends Component {
       return <Redirect to="/login" />
     }
     return(
-      <Navbar fixed="top">
+      <Navbar id="navBar" fixed="top">
       <Navbar.Brand id="navbarContainer" href="/home">My Teams</Navbar.Brand>
       <Nav className="mr-auto">
         <Button id="homeButton" variant="success" href='/home' >Home</Button>

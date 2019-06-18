@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
-import DisplayTeamArticles from './DisplayTeamArticles';
+import DisplayTeamArticles from './FormatTeamArticles';
 import TeamCarousel from './TeamCarousel';
 import CurrentScores from './CurrentScores';
 import Navbar from '../../Components/Navbar/Navbar';
@@ -33,11 +33,6 @@ class TeamHomePage extends React.Component {
     }
   }
 
-  changeCurrentTeam = (teamName) => {
-    this.setState({teamName}) 
-    setTimeout(() => this.fetchAndSetNewsArticles(), 100 )
-  }
-  
   componentDidMount() {
     let currentDate = moment().format("YYYY-MMM-D");
     this.setState({currentDate})
@@ -55,10 +50,20 @@ class TeamHomePage extends React.Component {
     .then(this.fetchAndSetNewsArticles)
     .then(this.getNext10Dates)
     .catch(console.error)
+
   }
 
+  changeCurrentTeam = (teamName) => {
+    this.setState({teamName}) 
+    setTimeout(() => this.fetchAndSetNewsArticles(), 300 )
+  }
+  
   mountNewsComponent = () => {
     this.setState({displaysNews: true})
+  }
+
+  redirectToLogin = () => {
+    this.setState({redirectToLogin: true})
   }
 
   getDefaultUserTeam = () => {
@@ -80,48 +85,6 @@ class TeamHomePage extends React.Component {
      return ( this.state.userTeams.filter(team => team.name === this.state.teamName) )[0].id
   }
 
-  destoryFavoriteUserTeam = () => {
-    const currTeamID = this.getCurrentTeamId();
-    fetch(`${BASE_HOSTING_URL}/users/${this.state.userId}/teams/${currTeamID}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${this.state.jwtToken}`
-      }
-    })
-    .catch(console.error)
-    setTimeout(() => window.location.reload(true), 500)
-  }
-
-  fetchAndSetNewsArticles = () => {
-    this.fetchUpcomingGames();
-    fetch(`${FIRST_HALF_NEWS_URL}${this.state.teamName}${SECOND_HALF_NEWS_URL}`)
-    .then(response => response.json())
-    .then(teamNews => this.setState({teamNews}) )
-    .catch(console.error);
-  }
-
-  postNewTeamWithUser = (teamName) => {
-    const { userId, jwtToken } = this.state;
-    const team = {
-      name: teamName,
-      city: teamName,
-      description: teamName,
-      user_id: userId
-    }
-    fetch(`${BASE_HOSTING_URL}/users/${userId}/teams`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${jwtToken}`
-      },
-      body: JSON.stringify({team})
-    })
-    .catch(console.error)
-  }
-  
   handleClick = (event) => {
     event.preventDefault();
     this.fetchAndSetNewsArticles();
@@ -134,23 +97,6 @@ class TeamHomePage extends React.Component {
     this.fetchAndSetNewsArticles();
 
     setTimeout(() => window.location.reload(true), 1000)
-  }
-
-  fetchUpcomingGames = () => {
-    this.clearUpcomingGamesState();
-    let originalMonth = this.state.currentDate.split('-')[1]
-    let dateOnly = this.state.currentDate.split('-')[2]; // Get the date only  
-    let monthOnly = originalMonth.toUpperCase(); // Month Only
-    let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
-      // Retrieve all the games left in the current month
-      while(dateOnly++ < 30) {
-      fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly}?key=${apiConfig.sportsdataApi}`)
-      .then(response => response.json())
-      .then(this.parseUpcomingGames)
-      .catch(console.error)
-    }
-    const upcomingGames = this.state.upcomingGames.sort((alpha, beta) => alpha.time.localeCompare(beta.time))
-    this.setState({upcomingGames})
   }
 
   clearUpcomingGamesState = () => {
@@ -173,9 +119,6 @@ class TeamHomePage extends React.Component {
       return { upcomingGames }
     })
 
-  }
-  redirectToLogin = () => {
-    this.setState({redirectToLogin: true})
   }
 
   abbreviateMLBteam = () => {
@@ -241,12 +184,71 @@ class TeamHomePage extends React.Component {
     }
   }
 
+  destoryFavoriteUserTeam = () => {
+    const currTeamID = this.getCurrentTeamId();
+    fetch(`${BASE_HOSTING_URL}/users/${this.state.userId}/teams/${currTeamID}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${this.state.jwtToken}`
+      }
+    })
+    .catch(console.error)
+    setTimeout(() => window.location.reload(true), 500)
+  }
+
+  fetchAndSetNewsArticles = () => {
+    this.fetchUpcomingGames();
+    fetch(`${FIRST_HALF_NEWS_URL}${this.state.teamName}${SECOND_HALF_NEWS_URL}`)
+    .then(response => response.json())
+    .then(teamNews => this.setState({teamNews}) )
+    .catch(console.error);
+  }
+
+  postNewTeamWithUser = (teamName) => {
+    const { userId, jwtToken } = this.state;
+    const team = {
+      name: teamName,
+      city: teamName,
+      description: teamName,
+      user_id: userId
+    }
+    fetch(`${BASE_HOSTING_URL}/users/${userId}/teams`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${jwtToken}`
+      },
+      body: JSON.stringify({team})
+    })
+    .catch(console.error)
+  }
+
+  fetchUpcomingGames = () => {
+    this.clearUpcomingGamesState();
+    let originalMonth = this.state.currentDate.split('-')[1]
+    let dateOnly = this.state.currentDate.split('-')[2]; // Get the date only  
+    let monthOnly = originalMonth.toUpperCase(); // Month Only
+    let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
+      // Retrieve all the games left in the current month
+      while(dateOnly++ < 30) {
+      fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly}?key=${apiConfig.sportsdataApi}`)
+      .then(response => response.json())
+      .then(this.parseUpcomingGames)
+      .catch(console.error)
+    }
+    const upcomingGames = this.state.upcomingGames.sort((alpha, beta) => alpha.time.localeCompare(beta.time))
+    this.setState({upcomingGames})
+  }
+
   render() {
     if(this.state.redirectToLogin) {
       return <Redirect to='/login' />
     }
     return (
-      <div className="teamInput">  
+      <div className="teamInput" onScroll={this.handleScroll}>  
       <Navbar handleTeamSelection={this.handleTeamSelection}/>
       {this.state.teamNews.articles && 
         <TeamCarousel userTeams={this.state.userTeams}/>

@@ -5,7 +5,7 @@ import './Team.css';
 const moment = require('moment');
 
 
-export default class DisplayTeamArticles extends Component {
+export default class FormatTeamArticles extends Component {
   constructor(props) {
     super(props)
     this.state = {
