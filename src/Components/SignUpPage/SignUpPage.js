@@ -32,7 +32,7 @@ export default class SignUpPage extends React.Component {
       },
       body: JSON.stringify({
      user: {
-      username: this.state.username,
+      username: this.state.username.toLowerCase(),
       password: this.state.password,
       first_name: this.state.firstName,
       last_name: this.state.lastName,

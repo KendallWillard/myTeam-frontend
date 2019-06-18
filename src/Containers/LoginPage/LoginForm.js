@@ -57,7 +57,8 @@ export default class FormPage extends React.Component {
   }
 
   fetchUserInfo = (event) => {
-    const { username, password } = this.state
+    const { username, password } = this.state;
+    username = username.toLowerCase();
     event.preventDefault();
     fetch(`${BASE_HOSTING_URL}/login`, {
       method: 'POST',
