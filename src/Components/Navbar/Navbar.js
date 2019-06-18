@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
+import { Navbar, Nav, Form, FormControl, Button, Col, Row, Container } from 'react-bootstrap';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Redirect } from 'react-router-dom';
 import './Navbar.css';
@@ -50,13 +50,14 @@ export default class myNavbar extends Component {
       <Nav className="mr-auto">
         <Button id="homeButton" variant="success" href='/home' >Home</Button>
         <Button id="homeButton" variant="warning" href='/info' >Info</Button>
+        <Container>
         <MDBDropdown>
       <MDBDropdownToggle id="homeButton" caret color="">
         Add a Favorite Team
       </MDBDropdownToggle>
       <MDBDropdownMenu basic>
       <MDBDropdown dropright>
-          <MDBDropdownToggle caret color="info">
+          <MDBDropdownToggle id='proSport' caret color="info">
             MLB
           </MDBDropdownToggle>
           <MDBDropdownMenu basic>
@@ -125,7 +126,7 @@ export default class myNavbar extends Component {
           </MDBDropdownMenu>
         </MDBDropdown>
       <MDBDropdown dropright>
-          <MDBDropdownToggle caret color="warning">
+          <MDBDropdownToggle id='proSport' caret color="warning">
             NFL
           </MDBDropdownToggle>
           <MDBDropdownMenu basic>
@@ -200,7 +201,7 @@ export default class myNavbar extends Component {
           </MDBDropdownMenu>
         </MDBDropdown>
         <MDBDropdown dropright>
-          <MDBDropdownToggle caret color="success">
+          <MDBDropdownToggle id='proSport' caret color="success">
             NBA
           </MDBDropdownToggle>
           <MDBDropdownMenu basic>
@@ -251,7 +252,7 @@ export default class myNavbar extends Component {
           </MDBDropdownMenu>
         </MDBDropdown>
         <MDBDropdown dropright>
-          <MDBDropdownToggle caret color="primary">
+          <MDBDropdownToggle id='proSport' caret color="primary">
             MLS
           </MDBDropdownToggle>
           <MDBDropdownMenu basic>
@@ -295,8 +296,79 @@ export default class myNavbar extends Component {
              </MDBDropdown>
           </MDBDropdownMenu>
         </MDBDropdown>
+        <MDBDropdown dropright>
+          <MDBDropdownToggle id='proSport' caret color="info">
+            NHL
+          </MDBDropdownToggle>
+          <MDBDropdownMenu basic>
+            <MDBDropdown dropright>
+              <MDBDropdownToggle caret color="danger">
+                Eastern
+              </MDBDropdownToggle>
+              <MDBDropdownMenu basic>
+                <MDBDropdownItem>Atlantic</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >Tampa Bay Lightning</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Tampa Bay Rays">Boston Bruins</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Boston Red Sox">Toronto Maple Leafs</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Toronto Blue Jays">Montreal Canadiens</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Baltimore Orioles">Florida Panthers</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Buffalo Sabres</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">Detroit Red Wings</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago White Sox">Ottawa Senators</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem>Metropolitan</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >Washington Capitals</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Tampa Bay Rays">New York Islanders</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Boston Red Sox">Pittsburgh Penguis</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Toronto Blue Jays">Carolina Hurricans</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Baltimore Orioles">Columbus Blue Jackets</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Philadelphia Flyers</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">New York Rangers</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago White Sox">New Jersey Devils</MDBDropdownItem>
+                <MDBDropdownItem divider />
+              </MDBDropdownMenu>
+            </MDBDropdown>
+              <MDBDropdown dropright>
+                <MDBDropdownToggle caret color="primary">
+                  Western
+                </MDBDropdownToggle>
+
+                <MDBDropdownMenu id='dropDown'>
+                <Row>
+                  <Col md={6}>
+                <MDBDropdownItem>Central</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >Nashville Predators</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Tampa Bay Rays">Winnipeg Jets</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Boston Red Sox">St. Louis Blues</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Toronto Blue Jays">Dallas Stars</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Baltimore Orioles">Colorado Avalanche</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Chicago Blackhawks</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">Minnesota Wild</MDBDropdownItem>
+                </Col>
+                <Col md={6}>
+                <MDBDropdownItem>Pacific</MDBDropdownItem>
+                <MDBDropdownItem divider />
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="New York Yankees" >Calgary Flames</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Tampa Bay Rays">San Jose Sharks</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Boston Red Sox">Vegas Golden Knights</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Toronto Blue Jays">Arizona Coyotes</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Baltimore Orioles">Vancouver Canucks</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Minnesota Twins">Anaheim Ducks</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Cleveland Indians">Edmonton Oilers</MDBDropdownItem>
+                <MDBDropdownItem  onClick={this.props.handleTeamSelection} name="team" value="Chicago White Sox">Los Angeles Kings</MDBDropdownItem>
+                </Col>        
+                </Row>
+                </MDBDropdownMenu>
+
+              </MDBDropdown>
+          </MDBDropdownMenu>
+        </MDBDropdown>
       </MDBDropdownMenu>
     </MDBDropdown>
+    </Container>
       </Nav>
       <Form inline>
         <Button variant="danger" onClick={this.logout} >Logout</Button>

@@ -91,12 +91,12 @@ class TeamHomePage extends React.Component {
   }
 
   handleTeamSelection = (event) => {
-    const { value } = event.target
-    this.setState({teamName: value})
-    this.postNewTeamWithUser(value)
+    const { innerHTML } = event.target
+    this.setState({teamName: innerHTML})
+    this.postNewTeamWithUser(innerHTML)
     this.fetchAndSetNewsArticles();
 
-    setTimeout(() => window.location.reload(true), 1000)
+    setTimeout(() => window.location.reload(true), 500)
   }
 
   clearUpcomingGamesState = () => {
