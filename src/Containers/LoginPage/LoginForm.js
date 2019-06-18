@@ -49,10 +49,11 @@ export default class FormPage extends React.Component {
       this.setState({loggedIn: false, incorrectPassword: true});
     }
     else {
-      this.setState({loading: true})
-      window.localStorage.setItem( 'userID', user.id )
-      window.localStorage.setItem( 'jwtToken', jwt ) 
-      setTimeout( () => this.setState({loggedIn: true}), 1000 )
+      this.setState({loading: true});
+      this.props.setUsername(user.username);
+      window.localStorage.setItem( 'userID', user.id );
+      window.localStorage.setItem( 'jwtToken', jwt ) ;
+      setTimeout(() => this.setState({loggedIn: true}), 2000 );
     }
   }
 

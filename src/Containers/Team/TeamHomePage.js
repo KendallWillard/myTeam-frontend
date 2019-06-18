@@ -11,7 +11,7 @@ import UpcomingGames from './UpcomingGames';
 var moment = require('moment')
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
-      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApiTwo}`,
+      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
       BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 
@@ -82,12 +82,22 @@ class TeamHomePage extends React.Component {
 
   getCurrentTeamId = () => {
     // Retrieve the current team selected from user teams stored in state and then grab its ID
-     return ( this.state.userTeams.filter(team => team.name === this.state.teamName) )[0].id
+    return ( this.state.userTeams.filter(team => team.name === this.state.teamName) )[0].id
   }
 
   handleClick = (event) => {
     event.preventDefault();
     this.fetchAndSetNewsArticles();
+  }
+
+  handleSarchSelection = (event) => {
+    console.log(event)
+    const { value } = event.target
+    this.setState({teamName: value})
+    this.postNewTeamWithUser(value)
+    this.fetchAndSetNewsArticles();
+
+    setTimeout(() => window.location.reload(true), 500)
   }
 
   handleTeamSelection = (event) => {
@@ -249,7 +259,7 @@ class TeamHomePage extends React.Component {
     }
     return (
       <div className="teamInput" onScroll={this.handleScroll}>  
-      <Navbar handleTeamSelection={this.handleTeamSelection}/>
+      <Navbar handleTeamSelection={this.handleTeamSelection} handleSearchSelection={this.handleSarchSelection}/>
       {this.state.teamNews.articles && 
         <TeamCarousel userTeams={this.state.userTeams}/>
       }    

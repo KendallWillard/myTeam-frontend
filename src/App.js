@@ -8,7 +8,13 @@ import InfoPage from './Components/Info/InfoPage';
 import WelcomePage from './Components/WelcomePage/WelcomePage';
 
 class App extends Component {
+  state = {
+    username: ''
+  }
 
+  setUsername = (username) => {
+    this.setState({username});
+  }
   render() {
     return (
         <Router >
@@ -16,7 +22,7 @@ class App extends Component {
             return <TextFieldMargins />
           }} />
           <Route exact path='/login' render={() => {
-            return <LoginPage />
+            return <LoginPage setUsername={this.setUsername}/>
           }} />
           <Route exact path='/signup' render={() => {
             return <SignUpPage />

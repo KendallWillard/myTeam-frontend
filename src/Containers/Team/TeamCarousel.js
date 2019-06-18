@@ -3,7 +3,7 @@ import { Carousel } from 'react-bootstrap';
 import apiConfig from '../../apiKeys';
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
-      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=50&apiKey=${apiConfig.newsApiTwo}`;
+      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=50&apiKey=${apiConfig.newsApi}`;
 
 
 class ControlledCarousel extends React.Component {
