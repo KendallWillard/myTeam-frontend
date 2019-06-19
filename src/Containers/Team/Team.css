@@ -50,3 +50,7 @@ aside {
 #removeTeam {
   margin-top: 30%;
 }
+
+#twitterButton {
+  max-width: 20px;
+}

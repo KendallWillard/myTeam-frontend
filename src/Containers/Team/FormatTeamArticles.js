@@ -86,9 +86,9 @@ export default class FormatTeamArticles extends Component {
                 <Card.Link href={article.url}>Source: {article.source.name}</Card.Link>
               </Card.Body>
               <Card.Footer>
-                <Twitter url={article.url} />
-                <Facebook url={article.url} />
-                <Reddit url={article.url} /> <br></br>
+                <Twitter url={article.url} text="Share"/>
+                <Facebook url={article.url} text="Share"/>
+                <Reddit url={article.url} text="Share"/> <br></br>
                 <small className="text-muted">Last Updated: {article.publishedAt} Central</small>
               </Card.Footer>
             </Card> 
