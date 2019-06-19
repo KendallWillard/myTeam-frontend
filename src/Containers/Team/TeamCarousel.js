@@ -62,6 +62,7 @@ class ControlledCarousel extends React.Component {
 
   fetchUserTeamsMostRecentStory = () => {
     this.props.userTeams.map((userTeam, ndx) => {
+      console.log(userTeam)
       return fetch(`${FIRST_HALF_NEWS_URL}${userTeam.name}${SECOND_HALF_NEWS_URL}`)
       .then(response => response.json())
       .then(newsArticles => this.parseAndStoreMostRecentNewsArticle(newsArticles, userTeam.name))

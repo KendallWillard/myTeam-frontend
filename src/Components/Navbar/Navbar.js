@@ -375,10 +375,6 @@ export default class myNavbar extends Component {
     </Container>
       </Nav>
       <Form inline>
-      <FormControl onChange={this.handleClick} type="text" placeholder="Add A Team" className="mr-sm-2" />
-      <Button variant="outline-success">Add Team</Button>
-    </Form>
-      <Form inline>
         <Button variant="danger" onClick={this.logout} >Logout</Button>
       </Form>
     </Navbar>

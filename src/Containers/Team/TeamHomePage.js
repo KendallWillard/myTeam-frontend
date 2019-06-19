@@ -97,7 +97,7 @@ class TeamHomePage extends React.Component {
     this.postNewTeamWithUser(value)
     this.fetchAndSetNewsArticles();
 
-    setTimeout(() => window.location.reload(true), 500)
+    setTimeout(() => window.location.reload(), 500)
   }
 
   handleTeamSelection = (event) => {
