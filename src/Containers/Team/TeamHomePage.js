@@ -269,6 +269,8 @@ class TeamHomePage extends React.Component {
     return (
       <div className="teamInput" onScroll={this.handleScroll}>  
       <Navbar handleTeamSelection={this.handleTeamSelection} handleSearchSelection={this.handleSarchSelection}/>
+
+      
       {this.state.teamNews.articles && 
         <TeamCarousel userTeams={this.state.userTeams}/>
       }    
@@ -281,7 +283,10 @@ class TeamHomePage extends React.Component {
         {this.state.teamNews.articles &&
           <UpcomingGames upcomingGames={this.state.upcomingGames} />
         }
-      <Button id='removeTeam' variant="danger" onClick={this.destoryFavoriteUserTeam} >Delete {this.state.teamName}</Button>
+        {
+          this.state.userTeams.length > 0 &&
+          <Button id='removeTeam' variant="danger" onClick={this.destoryFavoriteUserTeam} >Delete {this.state.teamName}</Button>
+        }
       </Col>
       <Col sm={10}>
     { this.state.teamNews.articles &&
@@ -295,6 +300,10 @@ class TeamHomePage extends React.Component {
       </Col>
       </Row>
       </Container>
+      {this.state.userTeams.length === 0 && 
+        <h1>Welcome To My Teams. To get started add one of your favorite teams at the
+           top to view their recent news, current scores, and upcoming games</h1>
+      }
         </div>
     );
   }
