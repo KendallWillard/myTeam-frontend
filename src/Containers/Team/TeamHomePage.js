@@ -249,8 +249,17 @@ class TeamHomePage extends React.Component {
       .then(this.parseUpcomingGames)
       .catch(console.error)
     }
-    const upcomingGames = this.state.upcomingGames.sort((alpha, beta) => alpha.time.localeCompare(beta.time))
+    if(this.state.upcomingGames[0]) {
+      const upcomingGames = this.state.upcomingGames.sort((alpha, beta) => {
+       if(alpha.time) {
+         return ( alpha.time.localeCompare(beta.time))
+       }
+       else {
+         return null
+       }
+    })
     this.setState({upcomingGames})
+   }
   }
 
   render() {
