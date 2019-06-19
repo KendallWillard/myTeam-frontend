@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { CardDeck, Card, Col, Row } from 'react-bootstrap'
 import UserFavoriteTeams from './UserFavoriteTeams';
+import { TwitterShareButton } from 'react-twitter-embed';
 import './Team.css';
 const moment = require('moment');
 
@@ -10,7 +11,8 @@ export default class FormatTeamArticles extends Component {
     super(props)
     this.state = {
       formattedArticles: [],
-      teamName: this.props.teamName
+      teamName: this.props.teamName,
+      showTwitterSharePage: true
     }
   }
 
@@ -40,6 +42,7 @@ export default class FormatTeamArticles extends Component {
     })
   }
 
+
   reMountComponent = () => {
     let parsedArticles = this.parseAllTheArticles();
     // let newparsedArticles = this.transposeDuplicates(parsedArticles)
@@ -66,19 +69,22 @@ export default class FormatTeamArticles extends Component {
     )
   } 
 
+
   formatArticles = (parsedArticles) => {
     return( 
       parsedArticles.map( (article, ndx) => {
         return(
           <Col key={Date.now() + ndx} md={4} id="cardContainer" >
             <Card>
+              
               <Card.Img id="cardImage"  variant="top" src={article.urlToImage} />
               <Card.Body>
-                <Card.Title>{article.title}</Card.Title>
+                <Card.Title>{article.title} </Card.Title>
                 <Card.Text id="cardText">{article.content}</Card.Text>
                 <Card.Link href={article.url}>Source: {article.source.name}</Card.Link>
               </Card.Body>
               <Card.Footer>
+                <TwitterShareButton url={article.url} />
                 <small className="text-muted">Last Updated: {article.publishedAt} Central</small>
               </Card.Footer>
             </Card> 
@@ -99,7 +105,7 @@ export default class FormatTeamArticles extends Component {
   
   render() {
     return(
-      <div>
+      <div>      
         <UserFavoriteTeams 
         userTeams={this.props.userTeams} 
         changeCurrentTeam={this.props.changeCurrentTeam} 
