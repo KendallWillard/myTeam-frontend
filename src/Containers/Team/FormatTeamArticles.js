@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { CardDeck, Card, Col, Row } from 'react-bootstrap'
 import UserFavoriteTeams from './UserFavoriteTeams';
 import { TwitterShareButton } from 'react-twitter-embed';
+import { Facebook, Reddit, Twitter } from 'react-sharingbuttons';
+import 'react-sharingbuttons/dist/main.css';
 import './Team.css';
 const moment = require('moment');
 
@@ -84,7 +86,9 @@ export default class FormatTeamArticles extends Component {
                 <Card.Link href={article.url}>Source: {article.source.name}</Card.Link>
               </Card.Body>
               <Card.Footer>
-                <TwitterShareButton url={article.url} />
+                <Twitter url={article.url} />
+                <Facebook url={article.url} />
+                <Reddit url={article.url} /> <br></br>
                 <small className="text-muted">Last Updated: {article.publishedAt} Central</small>
               </Card.Footer>
             </Card> 
@@ -105,7 +109,7 @@ export default class FormatTeamArticles extends Component {
   
   render() {
     return(
-      <div>      
+      <div>     
         <UserFavoriteTeams 
         userTeams={this.props.userTeams} 
         changeCurrentTeam={this.props.changeCurrentTeam} 
