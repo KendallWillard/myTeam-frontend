@@ -2,7 +2,12 @@ import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBInput, MDBBtn, MDBCard, MDBCardBody, MDBCardHeader, MDBIcon } from 'mdbreact';
 import { Redirect } from 'react-router-dom';
 import './SignUpPage.css';
+import { RingLoader } from 'react-spinners';
+import { css } from '@emotion/core';
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
+const override = css`
+    display: block;
+`;
 
 
 export default class SignUpPage extends React.Component {
@@ -12,7 +17,8 @@ export default class SignUpPage extends React.Component {
     username: '',
     password: '',
     phone: '',
-    redirectToLogin: false
+    redirectToLogin: false,
+    loading: false
   }
 
   handleChange = (event) => {
@@ -46,7 +52,8 @@ export default class SignUpPage extends React.Component {
   }
 
   redirectToLogin = () => {
-    this.setState({redirectToLogin: true})
+    this.setState({loading: true});
+    setTimeout(() => this.setState({redirectToLogin: true}), 1000 )
   }
 
 
@@ -56,6 +63,20 @@ export default class SignUpPage extends React.Component {
     }
     return (
       <MDBContainer id="form-container">
+      {
+        this.state.loading && 
+          <div id="ringloader">
+            <RingLoader
+            css={override}
+            sizeUnit={"px"}
+            size={400}
+            color={'#1030D8'}
+            loading={this.state.loading}
+            />
+          </div>
+      }
+      {
+        !this.state.loading &&    
         <MDBRow>
           <MDBCol md="6">
             <MDBCard>
@@ -136,6 +157,7 @@ export default class SignUpPage extends React.Component {
             </MDBCard>
           </MDBCol>
         </MDBRow>
+      }
       </MDBContainer>
     );
   };

@@ -12,8 +12,8 @@ import {
   MDBInput
 } from "mdbreact";
 import { Alert } from 'react-bootstrap';
-import { RingLoader } from 'react-spinners';
 import { Redirect } from 'react-router-dom';
+import { RingLoader } from 'react-spinners';
 import { css } from '@emotion/core';
 import './LoginForm.css'
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
