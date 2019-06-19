@@ -11,7 +11,7 @@ import UpcomingGames from './UpcomingGames';
 var moment = require('moment')
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
-      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
+      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApiThree}`,
       BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 

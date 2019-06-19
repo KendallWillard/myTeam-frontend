@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { CardDeck, Card, Col, Row } from 'react-bootstrap'
+import { CardDeck, Card, Col, Row, Modal, Button } from 'react-bootstrap'
 import UserFavoriteTeams from './UserFavoriteTeams';
-import { TwitterShareButton } from 'react-twitter-embed';
 import { Facebook, Reddit, Twitter } from 'react-sharingbuttons';
+import TeamModal from './TeamModal';
 import 'react-sharingbuttons/dist/main.css';
 import './Team.css';
 const moment = require('moment');
@@ -14,7 +14,8 @@ export default class FormatTeamArticles extends Component {
     this.state = {
       formattedArticles: [],
       teamName: this.props.teamName,
-      showTwitterSharePage: true
+      showTwitterSharePage: true,
+      showModal: false
     }
   }
 
@@ -43,6 +44,10 @@ export default class FormatTeamArticles extends Component {
       )
     })
   }
+
+  // componentDidUpdate(prevState) {
+
+  // }
 
 
   reMountComponent = () => {
@@ -76,9 +81,8 @@ export default class FormatTeamArticles extends Component {
     return( 
       parsedArticles.map( (article, ndx) => {
         return(
-          <Col key={Date.now() + ndx} md={4} id="cardContainer" >
+          <Col key={Date.now() + ndx} md={4} id="cardContainer" onClick={this.openModal}>
             <Card>
-              
               <Card.Img id="cardImage"  variant="top" src={article.urlToImage} />
               <Card.Body>
                 <Card.Title>{article.title} </Card.Title>
@@ -93,9 +97,19 @@ export default class FormatTeamArticles extends Component {
               </Card.Footer>
             </Card> 
           </Col>
+          
         )
       }) 
     ) 
+  }
+
+  closeModal = (event) => {
+    this.setState({showModal: false})
+    
+  }
+
+  openModal = (event) => {
+    this.setState({showModal: true})
   }
 
   componentDidMount() {
@@ -114,6 +128,10 @@ export default class FormatTeamArticles extends Component {
         userTeams={this.props.userTeams} 
         changeCurrentTeam={this.props.changeCurrentTeam} 
         reMountComponent={this.reMountComponent}
+        />
+        <TeamModal 
+        show={this.state.modalShow} 
+        onHide={this.closeModal}
         />
         <CardDeck>
           <Row>
