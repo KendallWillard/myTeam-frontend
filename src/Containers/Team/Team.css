@@ -54,3 +54,12 @@ aside {
 #twitterButton {
   max-width: 20px;
 }
+
+#modalBody {
+  height: 250px;
+  overflow-y: auto;
+}
+
+#modalContainer {
+  overflow-y: initial !important;
+}

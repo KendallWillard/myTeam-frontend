@@ -15,7 +15,8 @@ export default class FormatTeamArticles extends Component {
       formattedArticles: [],
       teamName: this.props.teamName,
       showTwitterSharePage: true,
-      showModal: false
+      modalShow: false,
+      currentArticle: {}
     }
   }
 
@@ -81,7 +82,7 @@ export default class FormatTeamArticles extends Component {
     return( 
       parsedArticles.map( (article, ndx) => {
         return(
-          <Col key={Date.now() + ndx} md={4} id="cardContainer" onClick={this.openModal}>
+          <Col key={Date.now() + ndx} md={4} id="cardContainer" onClick={() => this.openModal(article)}>
             <Card>
               <Card.Img id="cardImage"  variant="top" src={article.urlToImage} />
               <Card.Body>
@@ -103,13 +104,13 @@ export default class FormatTeamArticles extends Component {
     ) 
   }
 
-  closeModal = (event) => {
-    this.setState({showModal: false})
+  modalClose = (event) => {
+    this.setState({modalShow: false})
     
   }
 
-  openModal = (event) => {
-    this.setState({showModal: true})
+  openModal = (article) => {
+    this.setState({modalShow: true, currentArticle: article})
   }
 
   componentDidMount() {
@@ -131,7 +132,9 @@ export default class FormatTeamArticles extends Component {
         />
         <TeamModal 
         show={this.state.modalShow} 
-        onHide={this.closeModal}
+        onHide={this.modalClose}
+        article={this.state.currentArticle}
+        // openTheModal={this.openModal}
         />
         <CardDeck>
           <Row>
