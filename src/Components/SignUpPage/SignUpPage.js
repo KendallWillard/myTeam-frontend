@@ -48,12 +48,15 @@ export default class SignUpPage extends React.Component {
   })
     })
   .then(result => result.json())
-  .then(this.redirectToLogin)
+  .then(this.redirectToHome)
   .catch(console.error)
   }
 
-  redirectToLogin = ({ jwt, user }) => {
-    this.setState({loading: true});
+  redirectToLogin = () => {
+    this.setState({redirectToLogin: true});
+  }
+
+  redirectToHome = ({ jwt, user }) => {
     window.localStorage.setItem( 'userID', user.id );
     window.localStorage.setItem( 'jwtToken', jwt ) ;
     setTimeout(() => this.setState({redirectToHome: true}), 1000 )
