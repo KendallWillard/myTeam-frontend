@@ -21,7 +21,7 @@ export default class myNavbar extends Component {
     window.onscroll = function() {changeNavColor()}
     let navBar = document.getElementById('navBar');
     function changeNavColor() {
-      if(window.pageYOffset > 597) {
+      if(window.pageYOffset > 900) {
         navBar.style.backgroundColor = 'black';
       }
       else {

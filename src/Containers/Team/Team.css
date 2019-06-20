@@ -64,3 +64,9 @@ aside {
 #modalContainer {
   overflow-y: initial !important;
 }
+
+#introHeading {
+    color: black;
+    text-align: center;
+    padding-top: 100px;
+}

@@ -314,7 +314,7 @@ class TeamHomePage extends React.Component {
       </Row>
       </Container>
       {this.state.userTeams.length === 0 && 
-        <h1>Welcome To My Teams. To get started add one of your favorite teams at the
+        <h1 id='introHeading'>Welcome To My Teams. To get started add one of your favorite teams at the
            top to view their recent news, current scores, and upcoming games</h1>
       }
         </div>
