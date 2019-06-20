@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Form, FormControl, Button, Col, Row, Container } from 'react-bootstrap';
+import { Navbar, Nav, Form, Button, Col, Row, Container } from 'react-bootstrap';
 import { MDBDropdown, MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem } from "mdbreact";
 import { Redirect } from 'react-router-dom';
 import './Navbar.css';

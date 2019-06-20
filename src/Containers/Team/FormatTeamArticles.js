@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { CardDeck, Card, Col, Row, Modal, Button } from 'react-bootstrap'
+import { CardDeck, Card, Col, Row } from 'react-bootstrap'
 import UserFavoriteTeams from './UserFavoriteTeams';
 import { Facebook, Reddit, Twitter } from 'react-sharingbuttons';
 import TeamModal from './TeamModal';

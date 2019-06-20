@@ -88,9 +88,6 @@ export default class FormPage extends React.Component {
     this.setState({signUpPage: true})
   }
 
-  componentDidMount() {
-    console.log('mounted')
-  }
   render() {
     if(this.state.loggedIn) {
       return <Redirect to='/home' />

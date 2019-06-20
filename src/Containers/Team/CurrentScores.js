@@ -32,6 +32,7 @@ export default class CurrentScores extends React.Component {
         currentScores.push(myGameObj);
       }
       this.setState({currentScores: currentScores });
+      return currentScores
     })
   }
 
@@ -45,7 +46,6 @@ export default class CurrentScores extends React.Component {
           <ListGroup.Item variant="warning">{game.gameStatus}</ListGroup.Item>
           <br></br>
         </ListGroup>
-
       )
     })
     this.setState({formattedScores})

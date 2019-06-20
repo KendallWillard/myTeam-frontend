@@ -11,7 +11,7 @@ const override = css`
 
 
 export default class SignUpPage extends React.Component {
-  state = {
+  state = { 
     firstName: '',
     lastName: '',
     username: '',

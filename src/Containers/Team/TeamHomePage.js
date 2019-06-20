@@ -91,7 +91,6 @@ class TeamHomePage extends React.Component {
   }
 
   handleSarchSelection = (event) => {
-    console.log(event)
     const { value } = event.target
     this.setState({teamName: value})
     this.postNewTeamWithUser(value)

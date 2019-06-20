@@ -18,10 +18,10 @@ class ControlledCarousel extends React.Component {
   }
 
   formatTheCarousel = () => {
-    const formattedCarousel = this.state.userMostRecentTeamsNews.map(team => {
+    const formattedCarousel = this.state.userMostRecentTeamsNews.map((team, ndx) => {
       return(
-        <Carousel.Item>
-          <a href={team.url} key={team.id}>
+        <Carousel.Item key={Date.now() + ndx}>
+          <a href={team.url} >
             <img
               id="carousel-image"
               className="d-block w-100"
@@ -62,7 +62,6 @@ class ControlledCarousel extends React.Component {
 
   fetchUserTeamsMostRecentStory = () => {
     this.props.userTeams.map((userTeam, ndx) => {
-      console.log(userTeam)
       return fetch(`${FIRST_HALF_NEWS_URL}${userTeam.name}${SECOND_HALF_NEWS_URL}`)
       .then(response => response.json())
       .then(newsArticles => this.parseAndStoreMostRecentNewsArticle(newsArticles, userTeam.name))

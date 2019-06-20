@@ -2,12 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 export default class TeamModal extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
-    console.log(this.props.article)
     return(
       <Modal
       {...this.props}
