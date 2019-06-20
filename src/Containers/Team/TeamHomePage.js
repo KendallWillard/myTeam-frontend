@@ -298,7 +298,7 @@ class TeamHomePage extends React.Component {
           variant="danger" 
           onClick={this.destoryFavoriteUserTeam}
           >
-          Delete {this.state.teamName}
+          Remove {this.state.teamName} from favorites
           </Button>
         }
       </Col>

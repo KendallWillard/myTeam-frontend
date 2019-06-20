@@ -6,12 +6,6 @@ export default class TeamModal extends Component {
     super(props)
   }
 
-  // componentDidUpdate(prevProps) {
-  //   if(prevProps.show !== this.props.show) {
-  //     this.props.openTheModal()
-  //   }
-  // }
-
   render() {
     console.log(this.props.article)
     return(

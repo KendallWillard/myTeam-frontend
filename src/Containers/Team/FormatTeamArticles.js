@@ -82,9 +82,9 @@ export default class FormatTeamArticles extends Component {
     return( 
       parsedArticles.map( (article, ndx) => {
         return(
-          <Col key={Date.now() + ndx} md={4} id="cardContainer" onClick={() => this.openModal(article)}>
+          <Col key={Date.now() + ndx} md={4} id="cardContainer">
             <Card>
-              <Card.Img id="cardImage"  variant="top" src={article.urlToImage} />
+              <Card.Img id="cardImage"  variant="top" src={article.urlToImage}  onClick={() => this.openModal(article)}/>
               <Card.Body>
                 <Card.Title>{article.title} </Card.Title>
                 <Card.Text id="cardText">{article.content}</Card.Text>

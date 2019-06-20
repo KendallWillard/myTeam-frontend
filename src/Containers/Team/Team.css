@@ -29,6 +29,7 @@ aside {
 
 #cardImage {
   height: 171px;
+  cursor: pointer;
 }
 
 #cardText {
