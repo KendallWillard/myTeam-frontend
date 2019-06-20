@@ -3,3 +3,7 @@
   text-align: center;
   padding-top: 100px;
 }
+
+li {
+  list-style: none;
+}
