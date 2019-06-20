@@ -11,7 +11,7 @@ import UpcomingGames from './UpcomingGames';
 var moment = require('moment')
 import './Team.css';
 const FIRST_HALF_NEWS_URL = 'https://newsapi.org/v2/everything?q=',
-      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApi}`,
+      SECOND_HALF_NEWS_URL = `&sortBy=publishedAt&pageSize=100&apiKey=${apiConfig.newsApiTwo}`,
       BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 
 
@@ -242,7 +242,7 @@ class TeamHomePage extends React.Component {
     let monthOnly = originalMonth.toUpperCase(); // Month Only
     let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
       // Retrieve all the games left in the current month
-      while(dateOnly++ < 24) {
+      while(dateOnly++ < 30) {
       fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly}?key=${apiConfig.sportsdataApi}`)
       .then(response => response.json())
       .then(this.parseUpcomingGames)
