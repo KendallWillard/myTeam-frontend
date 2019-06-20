@@ -131,6 +131,7 @@ export default class FormatTeamArticles extends Component {
         reMountComponent={this.reMountComponent}
         />
         <TeamModal 
+        currentTeam={this.props.teamName}
         show={this.state.modalShow} 
         onHide={this.modalClose}
         article={this.state.currentArticle}

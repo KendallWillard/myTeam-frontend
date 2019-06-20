@@ -13,6 +13,7 @@ export default class TeamModal extends Component {
   // }
 
   render() {
+    console.log(this.props.article)
     return(
       <Modal
       {...this.props}
@@ -23,12 +24,13 @@ export default class TeamModal extends Component {
       >
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Modal heading
+          {this.props.currentTeam}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body id="modalBody">
-        <h3>{this.props.article.title}</h3>
-        <h5>{this.props.article.description}</h5>
+        <h1>{this.props.article.title}</h1>
+        <h3>{this.props.article.description}</h3>
+        <a href={this.props.article.url}> Source: {this.props.article.source ? this.props.article.source.name : null} </a>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={this.props.onHide}>Close</Button>

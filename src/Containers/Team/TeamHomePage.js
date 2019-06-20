@@ -268,24 +268,38 @@ class TeamHomePage extends React.Component {
     }
     return (
       <div className="teamInput" onScroll={this.handleScroll}>  
-      <Navbar handleTeamSelection={this.handleTeamSelection} handleSearchSelection={this.handleSarchSelection}/>
-
+      <Navbar 
+      handleTeamSelection={this.handleTeamSelection} 
+      handleSearchSelection={this.handleSarchSelection}
+      currentTeam={this.state.teamName}
+      />
+      
       
       {this.state.teamNews.articles && 
-        <TeamCarousel userTeams={this.state.userTeams}/>
+        <TeamCarousel 
+        userTeams={this.state.userTeams}/>
       }    
       <Container fluid>
       <Row>
       <Col sm={2} id='current-scores'>
         {this.state.teamNews.articles &&
-          <CurrentScores userTeams={this.state.userTeams} teamName={this.state.teamName} />
+          <CurrentScores 
+          userTeams={this.state.userTeams} 
+          teamName={this.state.teamName} />
         }
         {this.state.teamNews.articles &&
-          <UpcomingGames upcomingGames={this.state.upcomingGames} />
+          <UpcomingGames 
+          upcomingGames={this.state.upcomingGames} />
         }
         {
           this.state.userTeams.length > 0 &&
-          <Button id='removeTeam' variant="danger" onClick={this.destoryFavoriteUserTeam} >Delete {this.state.teamName}</Button>
+          <Button 
+          id='removeTeam' 
+          variant="danger" 
+          onClick={this.destoryFavoriteUserTeam}
+          >
+          Delete {this.state.teamName}
+          </Button>
         }
       </Col>
       <Col sm={10}>

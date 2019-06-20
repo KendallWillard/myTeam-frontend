@@ -51,7 +51,7 @@ export default class myNavbar extends Component {
       <Nav className="mr-auto">
         <Button id="homeButton" variant="success" href='/home' >Home</Button>
         <Button id="homeButton" variant="warning" href='/info' >Info</Button>
-        <Container>
+        <Container id="dropdownContainer">
         <MDBDropdown>
       <MDBDropdownToggle id="homeButton" caret color="">
         Add a Favorite Team
@@ -373,6 +373,8 @@ export default class myNavbar extends Component {
       </MDBDropdownMenu>
     </MDBDropdown>
     </Container>
+    <h1 id="currentTeam" >{this.props.currentTeam}</h1>
+
       </Nav>
       <Form inline>
         <Button variant="danger" onClick={this.logout} >Logout</Button>

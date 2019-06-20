@@ -1,6 +1,6 @@
 #homeButton {
   color: white;
-  background-color: rgba(45, 62, 156, 0.783)
+  background-color: rgba(45, 62, 156, 0.783);
 }
 #navbarContainer {
   color: white;
@@ -12,4 +12,14 @@
 
 #proSport {
   align-content: center;
+}
+
+#currentTeam {
+  width: 600px;
+  color: white;
+  text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+}
+
+#dropdownContainer {
+  width: 350px;
 }
