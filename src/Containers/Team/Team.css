@@ -19,7 +19,7 @@ aside {
 }
 
 #carousel-image {
-  max-height: 768px;
+  max-height: 1100px;
   cursor: pointer;
 }
 
@@ -28,7 +28,7 @@ aside {
 }
 
 #cardImage {
-  height: 171px;
+  height: 300px;
   cursor: pointer;
 }
 
