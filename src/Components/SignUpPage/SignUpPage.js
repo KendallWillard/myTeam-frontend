@@ -18,6 +18,7 @@ export default class SignUpPage extends React.Component {
     password: '',
     phone: '',
     redirectToLogin: false,
+    redirectToHome: false,
     loading: false
   }
 
@@ -51,15 +52,20 @@ export default class SignUpPage extends React.Component {
   .catch(console.error)
   }
 
-  redirectToLogin = () => {
+  redirectToLogin = ({ jwt, user }) => {
     this.setState({loading: true});
-    setTimeout(() => this.setState({redirectToLogin: true}), 1000 )
+    window.localStorage.setItem( 'userID', user.id );
+    window.localStorage.setItem( 'jwtToken', jwt ) ;
+    setTimeout(() => this.setState({redirectToHome: true}), 1000 )
   }
 
 
   render() {
     if(this.state.redirectToLogin) {
       return <Redirect to='/login' />
+    }
+    if(this.state.redirectToHome) {
+      return <Redirect to='/home' />
     }
     return (
       <MDBContainer id="form-container">
