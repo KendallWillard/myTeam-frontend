@@ -18,7 +18,7 @@ export default class TeamModal extends Component {
       </Modal.Header>
       <Modal.Body id="modalBody">
         <h1>{this.props.article.title}</h1>
-        <h3>{this.props.article.description}</h3>
+        <h3>{this.props.article.content}</h3>
         <a href={this.props.article.url}> Source: {this.props.article.source ? this.props.article.source.name : null} </a>
       </Modal.Body>
       <Modal.Footer>
