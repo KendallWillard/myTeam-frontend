@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import './SignUpPage.css';
 import { RingLoader } from 'react-spinners';
 import { css } from '@emotion/core';
+import { Alert } from 'react-bootstrap';
 const BASE_HOSTING_URL = `https://salty-dusk-65324.herokuapp.com`;
 const override = css`
     display: block;
@@ -19,7 +20,8 @@ export default class SignUpPage extends React.Component {
     phone: '',
     redirectToLogin: false,
     redirectToHome: false,
-    loading: false
+    loading: false,
+    dupUsername: false
   }
 
   handleChange = (event) => {
@@ -27,6 +29,10 @@ export default class SignUpPage extends React.Component {
     this.setState({
       [name]: value
     })
+  }
+
+  handleDismiss = () => {
+    this.setState({dupUsername: false})
   }
 
   handleSubmit = (event) => {
@@ -52,11 +58,16 @@ export default class SignUpPage extends React.Component {
   .catch(console.error)
   }
 
-  redirectToLogin = ({ jwt, user }) => {
-    this.setState({loading: true});
-    window.localStorage.setItem( 'userID', user.id );
-    window.localStorage.setItem( 'jwtToken', jwt ) ;
-    setTimeout(() => this.setState({redirectToHome: true}), 1000 )
+  redirectToLogin = ({ error, jwt, user }) => {
+    if(error.username) {
+      this.setState({dupUsername: true})
+    }
+    else {
+      this.setState({loading: true});
+      window.localStorage.setItem( 'userID', user.id );
+      window.localStorage.setItem( 'jwtToken', jwt ) ;
+      setTimeout(() => this.setState({redirectToHome: true}), 1000 )
+    }
   }
 
 
@@ -69,6 +80,14 @@ export default class SignUpPage extends React.Component {
     }
     return (
       <MDBContainer id="form-container">
+      {this.state.dupUsername &&
+        <Alert variant="danger" onClose={this.handleDismiss} dismissible>
+          <Alert.Heading>Error! Username has already been taken.</Alert.Heading>
+          <p>
+            Please Try Again...
+          </p>
+        </Alert>
+      }
       {
         this.state.loading && 
           <div id="ringloader">
