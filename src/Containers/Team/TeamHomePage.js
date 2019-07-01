@@ -242,7 +242,7 @@ class TeamHomePage extends React.Component {
     let monthOnly = originalMonth.toUpperCase(); // Month Only
     let yearOnly = this.state.currentDate.split('-')[0]; // Year only 
       // Retrieve all the games left in the current month
-      while(dateOnly++ < 30) {
+      while(dateOnly++ < 7) {
       fetch(`https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/${yearOnly}-${monthOnly}-${dateOnly}?key=${apiConfig.sportsdataApi}`)
       .then(response => response.json())
       .then(this.parseUpcomingGames)
