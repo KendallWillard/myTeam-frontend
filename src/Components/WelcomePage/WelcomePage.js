@@ -13,7 +13,9 @@ export default class InfoPage extends Component {
               <li>
                 <h1>Where you can view your favorite sports teams recent news, current scores, and upcoming games.
                   <li>
-                    <h1>This app is current in beta. Have fun.</h1>
+                    <h1>This app is current in beta. Have fun!</h1>
+                    <h1>Sign up for an account below or login to an existing one.</h1>
+
                   </li>
                 </h1>
               </li>
